@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name" />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a password" />
+      </div>
+      <button type="submit" class="green-button">Register</button>
+    </form>
+    <a
+      [ngClass]="{'button-selected': isButtonActive('/auth/login') }" routerLink="/auth/login"
+      routerLinkActive="button-selected">To login page!
+    </a>
+  </div>
+</div>
