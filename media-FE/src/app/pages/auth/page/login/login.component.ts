@@ -99,6 +99,7 @@ export class LoginComponent implements OnInit {
   //     }
   //   }
   // }
+  value: any;
 
   isButtonActive(route: string): boolean {
     return this.router.url.includes(route);

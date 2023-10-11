@@ -1,0 +1,36 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.not-found-content {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #FF5722; /* Adjust the color as needed */
+}
+
+p {
+  font-size: 1.2rem;
+  color: #333; /* Adjust the color as needed */
+  margin-bottom: 30px;
+}
+
+.btn {
+  background-color: #FF5722; /* Adjust the button color as needed */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #E64A19; /* Adjust the hover color as needed */
+}

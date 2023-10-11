@@ -1,13 +1,22 @@
-<div class="header-wrapper">
-  <div class="header-logo">
-<!--    logo-->
-  </div>
-  <div class="header-title">
-    <div id="menu-button">
-      <button
-        [ngClass]="{'button-selected': isButtonActive('/dashboard/endpoint') }" routerLink="/dashboard/endpoint"
-        routerLinkActive="button-selected">Page 1
-      </button>
-    </div>
+<!--      <button-->
+<!--        [ngClass]="{'button-selected': isButtonActive('/dashboard/endpoint') }" routerLink="/dashboard/endpoint"-->
+<!--        routerLinkActive="button-selected">Page 1-->
+<!--      </button>-->
+
+<div class="navbar">
+  <div class="logo">Media Logo</div>
+  <div class="menu">
+    <a>Home</a>
+    <a>About</a>
+    <a>Services</a>
+    <a>Contact</a>
+
+    <ng-container *ngIf="!isAuthenticated; then showLoginRegister; else showLogout"></ng-container>
+    <ng-template #showLoginRegister>
+      <a routerLink="/auth/login" class="login-button">Login</a>
+      <a routerLink="/auth/register" class="register-button">Register</a>
+    </ng-template>
+    <ng-template #showLogout><a class="logout-button" (click)="logout()">Logout</a></ng-template>
+
   </div>
 </div>

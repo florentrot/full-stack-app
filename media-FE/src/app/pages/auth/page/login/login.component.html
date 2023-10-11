@@ -1,20 +1,31 @@
 <div class="container">
   <div class="form-container">
     <h2>Login</h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" id="email" formControlName="email" placeholder="Enter your email" />
+        <input
+          type="text"
+          pInputText
+          formControlName="email"
+          field="email"
+          id="email"
+          placeholder="Enter your email" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
+        <input
+          type="password"
+          pInputText
+          id="password"
+          field="password"
+          formControlName="password"
+          placeholder="Enter your password" />
       </div>
       <button type="submit" class="green-button">Login</button>
     </form>
-    <a
-      [ngClass]="{'button-selected': isButtonActive('/auth/register') }" routerLink="/auth/register"
-      routerLinkActive="button-selected">I don't have an account!
+    <a routerLink="/auth/register">I don't have an account!
     </a>
   </div>
 </div>

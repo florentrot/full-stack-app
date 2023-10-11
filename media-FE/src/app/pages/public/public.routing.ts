@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from "./page/dashboard/dashboard.component";
+import { HomeComponent } from "./page/home/home.component";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'profile',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'profile',
-    component: DashboardComponent,
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: '**',
-    redirectTo: 'profile',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 ];
@@ -23,4 +23,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class PublicRoutingModule { }

@@ -10,6 +10,8 @@ import { AuthLayoutComponent } from "./layout/auth-layout/auth-layout.component"
 import { AuthModule } from "./pages/auth/auth.module";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
+import { PublicModule } from "./pages/public/public.module";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { SharedModule } from "./shared/shared.module";
     AuthLayoutComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    PublicModule
   ],
   providers: [],
   bootstrap: [AppComponent]
