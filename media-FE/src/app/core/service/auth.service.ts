@@ -1,53 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Buffer } from 'buffer';
+import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Endpoints } from "../../data/endpoints";
 import { AuthDto } from "../../data/interfaces/AuthDto";
 import { Observable } from "rxjs/internal/Observable";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { AuthenticationRequestDTO } from "../../data/interfaces/AuthenticationRequestDTO";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  auth = `${Endpoints.auth}`
-
+  authUrl = `${Endpoints.auth}`
   jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
-  private getHash(userName: string, password: string): string {
-    return 'Basic ' + Buffer.from(userName + ':' + password).toString('base64');
+  login(authRequest: AuthenticationRequestDTO): Observable<any> {
+    return this.http.post<AuthDto>(`${this.authUrl}/authenticate`, authRequest);
   }
-
-  // getToken(userName: string, password: string): Observable<AuthDto> {
-  //   const hash: string = this.getHash(userName, password);
-  //   return this.http.get<AuthDto>(
-  //     this.generateTokenUrl,
-  //     this.getOptionsWithAuth(hash) as object
-  //   );
-  // }
-
-  getToken(userName: string, password: string): Observable<AuthDto> {
-    // const hashedPerson: string = this.getHash(userName, password);
-    const person = {
-      email:userName,
-      password:password
-    };
-    return this.http.post<AuthDto>(`${this.auth}/authenticate`, person);
-    // return this.http.post<AuthDto>(`${this.auth}/authenticate`, hashedPerson);
-  }
-
-  // getOptionsWithAuth(hash: string): any {
-  //   return {
-  //     headers: new HttpHeaders({
-  //       'content-type': 'application/json',
-  //       authorization: hash,
-  //     }),
-  //     observe: 'body'
-  //   }
-  // }
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
@@ -68,6 +42,6 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['public/home']);
   }
 }

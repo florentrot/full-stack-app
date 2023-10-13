@@ -1,15 +1,32 @@
-<!--      <button-->
-<!--        [ngClass]="{'button-selected': isButtonActive('/dashboard/endpoint') }" routerLink="/dashboard/endpoint"-->
-<!--        routerLinkActive="button-selected">Page 1-->
-<!--      </button>-->
-
 <div class="navbar">
   <div class="logo">Media Logo</div>
   <div class="menu">
-    <a>Home</a>
-    <a>About</a>
-    <a>Services</a>
-    <a>Contact</a>
+    <a
+      *ngIf="isAuthenticated"
+      routerLink="/dashboard/profile"
+      [ngClass]="{'button-selected': isButtonActive('/dashboard/profile') }"
+      routerLinkActive="button-selected"
+    >Dashboard</a>
+      <a
+        routerLink="/public/home"
+        [ngClass]="{'button-selected': isButtonActive('/public/home') }"
+        routerLinkActive="button-selected"
+      >Home</a>
+      <a
+        routerLink="/public/about"
+        [ngClass]="{'button-selected': isButtonActive('/public/about') }"
+        routerLinkActive="button-selected"
+      >About</a>
+      <a
+        routerLink="/public/organizer"
+        [ngClass]="{'button-selected': isButtonActive('/public/organizer') }"
+        routerLinkActive="button-selected"
+      >Organizer</a>
+      <a
+        routerLink="/public/contact"
+        [ngClass]="{'button-selected': isButtonActive('/public/contact') }"
+        routerLinkActive="button-selected"
+      >Contact</a>
 
     <ng-container *ngIf="!isAuthenticated; then showLoginRegister; else showLogout"></ng-container>
     <ng-template #showLoginRegister>

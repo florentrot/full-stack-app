@@ -1,24 +1,49 @@
 <div class="container">
   <div class="form-container">
     <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name" />
+        <input
+          type="text"
+          pInputText
+          formControlName="firstName"
+          id="firstName"
+          placeholder="Enter your first name" />
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name" />
+        <input
+          type="text"
+          pInputText
+          formControlName="lastName"
+          id="lastName"
+          placeholder="Enter your last name" />
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" />
+        <input
+          type="email"
+          pInputText
+          formControlName="email"
+          id="email"
+          placeholder="Enter your email" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Create a password" />
+        <input
+          type="password"
+          pInputText
+          id="password"
+          formControlName="password"
+          placeholder="Create a password" />
       </div>
-      <button type="submit" class="green-button">Register</button>
+      <button
+        pButton
+        type="submit"
+        class="green-button"
+        [disabled]="isFormInvalid()"
+      >Register</button>
     </form>
     <a routerLink="/auth/login">To login page!
     </a>

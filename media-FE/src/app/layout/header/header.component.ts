@@ -8,24 +8,22 @@ import {AuthService} from "../../core/service/auth.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isAuthenticated: boolean = true;
+  isAuthenticated: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn();
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
-  // isButtonActive(route: string): boolean {
-  //   return this.router.url.includes(route);
-  // }
+  isButtonActive(route: string): boolean {
+    return this.router.url.includes(route);
+  }
 
   logout() {
+    this.isAuthenticated = false;
     this.authService.logout();
   }
 
-  isLoggedIn() {
-    this.isAuthenticated = localStorage.getItem('token') != undefined;
-  }
 }

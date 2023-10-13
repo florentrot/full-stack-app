@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../core/service/auth.service";
 import {AuthenticationRequestDTO} from "../../../../data/interfaces/AuthenticationRequestDTO";
+import {RegisterRequestDTO} from "../../../../data/interfaces/RegisterRequestDTO";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   showAlertMessage: boolean = false;
   usernameIsEmpty: boolean = false;
   passwordIsEmpty: boolean = false;
-  loading: boolean = false;
+  isLoading: boolean = false;
   errorMessage: string | undefined;
   loginForm: FormGroup | any;
   currentYear = new Date().getFullYear();
@@ -27,14 +28,14 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
     localStorage.clear();
-    this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    })
   }
 
   // onSubmit() {
@@ -101,31 +102,29 @@ export class LoginComponent implements OnInit {
   // }
   value: any;
 
-  isButtonActive(route: string): boolean {
-    return this.router.url.includes(route);
+  // isButtonActive(route: string): boolean {
+  //   return this.router.url.includes(route);
+  // }
+
+  isFormInvalid() {
+    return !this.loginForm.valid;
   }
 
-  onSubmit() {
-    this.loading = true;
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    this.login(email, password);
+  onLogin() {
+    this.isLoading = true;
+    if (this.loginForm.valid) {
+      const registrationData: RegisterRequestDTO = this.loginForm.value;
+      this.authService.login(registrationData).subscribe({
+        next: (tokenResponse) => {
+          if (tokenResponse.token) {
+            this.authService.setSession(tokenResponse);
+            this.router.navigate(['dashboard']);
+          }
+        },
+        error: (error) => {
+          console.error('Authentication failed:', error);
+        },
+      });
+    }
   }
-
-
-  private login(username: string, password: string) {
-
-    this.authService.getToken(username, password).subscribe({
-      next: (tokenResponse) => {
-        if (tokenResponse.token) {
-          this.authService.setSession(tokenResponse);
-          this.router.navigate(['dashboard']);
-        }
-      },
-      error: (error) => {
-
-      },
-    });
-  }
-
 }

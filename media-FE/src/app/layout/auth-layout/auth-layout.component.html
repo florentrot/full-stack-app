@@ -1,1 +1,22 @@
-<router-outlet></router-outlet>
+<div class="container">
+
+  <div class="navbar">
+    <div class="logo"
+         routerLink="/public/home"
+         routerLinkActive="button-selected"
+         style="cursor: pointer"
+    >Media Logo</div>
+
+    <div class="menu">
+      <a
+        routerLink="/public/home"
+        routerLinkActive="button-selected"
+      >Go back</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>

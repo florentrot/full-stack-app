@@ -2,7 +2,7 @@
   <div class="form-container">
     <h2>Login</h2>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -23,7 +23,12 @@
           formControlName="password"
           placeholder="Enter your password" />
       </div>
-      <button type="submit" class="green-button">Login</button>
+      <button
+        pButton
+        type="submit"
+        class="green-button"
+        [disabled]="isFormInvalid()"
+      >Login</button>
     </form>
     <a routerLink="/auth/register">I don't have an account!
     </a>

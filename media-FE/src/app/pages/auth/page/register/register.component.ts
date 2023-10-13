@@ -1,33 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from "../../../../core/service/auth.service";
+import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
+import { RegisterService } from "../../../../core/service/register.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  registerForm: FormGroup | any;
+export class RegisterComponent {
+  registrationForm: FormGroup | any;
+  isLoading: boolean = false;
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-    localStorage.clear();
-    this.registerForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    })
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private registerService: RegisterService,
+  ) {
+    this.registrationForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
-  onSubmit() {
-
+  isFormInvalid() {
+    return !this.registrationForm.valid;
   }
 
-  isButtonActive(route: string): boolean {
-    return this.router.url.includes(route);
+  onRegister() {
+    if (this.registrationForm.valid) {
+      const registrationData: RegisterRequestDTO = this.registrationForm.value;
+      this.registerService.register(registrationData).subscribe({
+        next: (tokenResponse) => {
+          if (tokenResponse.token) {
+            this.router.navigate(['auth/login']);
+          }
+        },
+        error: (error) => {
+          console.error('Registration failed:', error);
+        },
+      });
+    }
   }
+
+  // isButtonActive(route: string): boolean {
+  //   return this.router.url.includes(route);
+  // }
 
 }
