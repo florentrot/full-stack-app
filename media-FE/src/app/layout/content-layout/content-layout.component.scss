@@ -1,0 +1,23 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.header-wrapper {
+  position: fixed;
+  width: 100%;
+}
+
+.page-wrapper {
+  position: relative;
+  margin-top: 80px;
+}
+
+.footer-wrapper {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

@@ -1,36 +1,41 @@
 <div class="container">
   <div class="form-container">
     <h2>Login</h2>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          pInputText
-          formControlName="email"
-          field="email"
-          id="email"
-          placeholder="Enter your email" />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          pInputText
-          id="password"
-          field="password"
-          formControlName="password"
-          placeholder="Enter your password" />
-      </div>
-      <button
-        pButton
-        type="submit"
-        class="green-button"
-        [disabled]="isFormInvalid()"
-      >Login</button>
-    </form>
-    <a routerLink="/auth/register">I don't have an account!
-    </a>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="email"
+                field="email"
+                id="email"
+                class="form-control"
+                aria-describedby="emailHelp"
+                placeholder="Enter your email" />
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                pInputText
+                id="password"
+                field="password"
+                formControlName="password"
+                class="form-control "
+                placeholder="Enter your password" />
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="keepLoggedIn">
+      <label class="form-check-label mb-2" for="keepLoggedIn">Keep me logged in</label>
+    </div>
+          <button
+            type="submit"
+            class="btn btn-success w-25"
+            [disabled]="isFormInvalid()"
+          >Login</button>
+  </form>
+        <a routerLink="/auth/register">I don't have an account!</a>
   </div>
 </div>

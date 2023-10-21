@@ -1,39 +1,82 @@
-<div class="navbar">
-  <div class="logo">Media Logo</div>
-  <div class="menu">
-    <a
-      *ngIf="isAuthenticated"
-      routerLink="/dashboard/profile"
-      [ngClass]="{'button-selected': isButtonActive('/dashboard/profile') }"
-      routerLinkActive="button-selected"
-    >Dashboard</a>
-      <a
-        routerLink="/public/home"
-        [ngClass]="{'button-selected': isButtonActive('/public/home') }"
-        routerLinkActive="button-selected"
-      >Home</a>
-      <a
-        routerLink="/public/about"
-        [ngClass]="{'button-selected': isButtonActive('/public/about') }"
-        routerLinkActive="button-selected"
-      >About</a>
-      <a
-        routerLink="/public/organizer"
-        [ngClass]="{'button-selected': isButtonActive('/public/organizer') }"
-        routerLinkActive="button-selected"
-      >Organizer</a>
-      <a
-        routerLink="/public/contact"
-        [ngClass]="{'button-selected': isButtonActive('/public/contact') }"
-        routerLinkActive="button-selected"
-      >Contact</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Media Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+              <a
+                *ngIf="isAuthenticated"
+                routerLink="/dashboard/profile"
+                class="nav-link"
+                [ngClass]="{'active': isButtonActive('/dashboard/profile') }"
+                aria-current="page"
+              >Dashboard</a>
+        </li>
+        <li class="nav-item">
+                <a
+                  routerLink="/public/home"
+                  class="nav-link"
+                  [ngClass]="{'active': isButtonActive('/public/home') }"
+                  aria-current="page"
+                >Home</a>
+        </li>
+        <li class="nav-item">
+                <a
+                  routerLink="/public/about"
+                  class="nav-link"
+                  [ngClass]="{'active': isButtonActive('/public/about') }"
+                  aria-current="page"
+                >About</a>
+        </li>
+        <li class="nav-item">
+                <a
+                  routerLink="/public/organizer"
+                  class="nav-link"
+                  [ngClass]="{'active': isButtonActive('/public/organizer') }"
+                  aria-current="page"
+                >Organizer</a>
+        </li>
+        <li class="nav-item">
+                <a
+                  routerLink="/public/contact"
+                  class="nav-link"
+                  [ngClass]="{'active': isButtonActive('/public/contact') }"
+                >Contact</a>
+        </li>
+        <ng-container *ngIf="!isAuthenticated; then showLoginRegister; else showLogout"></ng-container>
+        <ng-template #showLoginRegister>
+        <li class="nav-item">
+          <a
+            routerLink="/auth/login"
+            class="nav-link auth-small"
+          >Login</a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLink="/auth/register"
+            class="nav-link auth-small"
+          >Register</a>
+        </li>
+        </ng-template>
+        <ng-template #showLogout><a class="nav-link auth-small" style="cursor: pointer" (click)="logout()">Logout</a></ng-template>
 
-    <ng-container *ngIf="!isAuthenticated; then showLoginRegister; else showLogout"></ng-container>
-    <ng-template #showLoginRegister>
-      <a routerLink="/auth/login" class="login-button">Login</a>
-      <a routerLink="/auth/register" class="register-button">Register</a>
-    </ng-template>
-    <ng-template #showLogout><a class="logout-button" (click)="logout()">Logout</a></ng-template>
+      </ul>
 
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success me-2" type="submit">Search</button>
+      </form>
+
+      <ng-container *ngIf="!isAuthenticated; then showLoginRegisterLarge; else showLogoutLarge"></ng-container>
+      <ng-template #showLoginRegisterLarge>
+        <a routerLink="/auth/login" class="btn btn-outline-success me-2 auth-large">Login</a>
+        <a routerLink="/auth/register" class="btn btn-outline-success me-2 auth-large">Register</a>
+      </ng-template>
+      <ng-template #showLogoutLarge><a class="btn btn-outline-success me-2 auth-large" (click)="logout()">Logout</a></ng-template>
+
+    </div>
   </div>
-</div>
+</nav>

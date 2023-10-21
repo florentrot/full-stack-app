@@ -1,3 +1,56 @@
+<!--<div class="container">-->
+<!--  <div class="form-container">-->
+<!--    <h2>Register</h2>-->
+<!--    <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">-->
+<!--      <div class="form-group">-->
+<!--        <label for="firstName">First Name</label>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          pInputText-->
+<!--          formControlName="firstName"-->
+<!--          id="firstName"-->
+<!--          placeholder="Enter your first name" />-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="lastName">Last Name</label>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          pInputText-->
+<!--          formControlName="lastName"-->
+<!--          id="lastName"-->
+<!--          placeholder="Enter your last name" />-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="email">Email</label>-->
+<!--        <input-->
+<!--          type="email"-->
+<!--          pInputText-->
+<!--          formControlName="email"-->
+<!--          id="email"-->
+<!--          placeholder="Enter your email" />-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="password">Password</label>-->
+<!--        <input-->
+<!--          type="password"-->
+<!--          pInputText-->
+<!--          id="password"-->
+<!--          formControlName="password"-->
+<!--          placeholder="Create a password" />-->
+<!--      </div>-->
+<!--      <button-->
+<!--        pButton-->
+<!--        type="submit"-->
+<!--        class="green-button"-->
+<!--        [disabled]="isFormInvalid()"-->
+<!--      >Register</button>-->
+<!--    </form>-->
+<!--    <a routerLink="/auth/login">To login page!-->
+<!--    </a>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <div class="container">
   <div class="form-container">
     <h2>Register</h2>
@@ -6,29 +59,34 @@
         <label for="firstName">First Name</label>
         <input
           type="text"
-          pInputText
           formControlName="firstName"
+          class="form-control"
           id="firstName"
-          placeholder="Enter your first name" />
+          placeholder="Enter your first name"/>
       </div>
+
       <div class="form-group">
         <label for="lastName">Last Name</label>
         <input
           type="text"
-          pInputText
           formControlName="lastName"
+          class="form-control"
           id="lastName"
-          placeholder="Enter your last name" />
+          placeholder="Enter your last name"/>
       </div>
+
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email"
-          pInputText
           formControlName="email"
+          class="form-control"
           id="email"
-          placeholder="Enter your email" />
+          placeholder="Enter your email"/>
       </div>
+
+
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -36,16 +94,20 @@
           pInputText
           id="password"
           formControlName="password"
-          placeholder="Create a password" />
+          class="form-control"
+          placeholder="Create a password"/>
       </div>
-      <button
-        pButton
-        type="submit"
-        class="green-button"
-        [disabled]="isFormInvalid()"
-      >Register</button>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="agreeTerms">
+        <label class="form-check-label mb-2 small" for="agreeTerms">By creating an account, you agree to our Terms and have read and acknowledge the Global Privacy Statement.</label>
+      </div>
+            <button
+              type="submit"
+              class="btn btn-success w-25"
+              [disabled]="isFormInvalid()"
+            >Register</button>
     </form>
-    <a routerLink="/auth/login">To login page!
-    </a>
+        <a routerLink="/auth/login">To login page!</a>
   </div>
 </div>
+

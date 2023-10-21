@@ -12,6 +12,7 @@ import { SharedModule } from "./shared/shared.module";
 import { PublicModule } from "./pages/public/public.module";
 import { CommonModule } from "@angular/common";
 import { DataModule } from "./data/data.module";
+import { HeaderAuthComponent } from "./layout/header-auth/header-auth.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DataModule } from "./data/data.module";
     ContentLayoutComponent,
     FooterComponent,
     HeaderComponent,
+    HeaderAuthComponent,
     AuthLayoutComponent
   ],
   imports: [
