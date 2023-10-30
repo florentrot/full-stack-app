@@ -1,18 +1,25 @@
+.page-wrapper {
+  background-image: url('/assets/background/fog.jpg');
+  background-position-y: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .container {
-  min-height: 100vh;
+  min-height: 93.8vh;
   display: flex;
   flex-direction: column;
 }
 
-
 .header-wrapper {
-  position: fixed;
+  position: relative;
   width: 100%;
 }
 
-.page-wrapper {
+.content-wrapper {
   position: relative;
-  margin-top: 80px;
+  margin-top: 10px;
 }
 
 .footer-wrapper {

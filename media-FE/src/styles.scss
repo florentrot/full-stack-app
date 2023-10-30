@@ -8,3 +8,36 @@
   text-decoration: none;
 }
 
+//header
+#logo-img {
+  width: 130px;
+}
+
+//override bootstrap buttons
+.btn-outline-success {
+  color: white !important;
+  border: white 1px solid !important;
+
+  &:hover {
+    color: black !important;
+    background-color: white !important;
+  }
+}
+
+.btn-success {
+  color: black !important;
+  background-color: white !important;
+  border: black 1.5px solid !important;
+  margin-bottom: 10px;
+
+
+  &:hover {
+    color: white !important;
+    background-color: black !important;
+    border: white 1px solid !important;
+  }
+
+  &:disabled {
+    border: gray 1px solid !important;
+  }
+}
