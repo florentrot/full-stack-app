@@ -1,6 +1,60 @@
-.footer {
+
+/* Add your custom CSS styles here */
+footer {
   background-color: #333;
-  color: white;
+  color: #fff;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-left, .footer-center, .footer-right {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-center {
   text-align: center;
+  padding-top: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.email-form {
+  text-align: center;
+  padding-top: 20px;
+}
+
+input[type="email"] {
+  width: 100%;
   padding: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    background-color: gray;
+  }
 }

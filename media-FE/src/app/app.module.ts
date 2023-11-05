@@ -13,6 +13,7 @@ import { PublicModule } from "./pages/public/public.module";
 import { CommonModule } from "@angular/common";
 import { DataModule } from "./data/data.module";
 import { HeaderAuthComponent } from "./layout/header-auth/header-auth.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HeaderAuthComponent } from "./layout/header-auth/header-auth.component"
     AuthModule,
     DataModule,
     SharedModule,
-    PublicModule
+    PublicModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

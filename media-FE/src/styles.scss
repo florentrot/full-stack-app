@@ -1,6 +1,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
+//reset
 * {
   margin: 0;
   padding: 0;
@@ -8,33 +9,32 @@
   text-decoration: none;
 }
 
-//header
-#logo-img {
-  width: 130px;
-}
-
 //override bootstrap buttons
 .btn-outline-success {
-  color: white !important;
-  border: white 1px solid !important;
+  color: #333 !important;
+  border: #333 1px solid !important;
+  border-radius: 0 !important;
 
   &:hover {
-    color: black !important;
-    background-color: white !important;
+    color: white !important;
+    background-color: #333 !important;
+    border-radius: 0 !important;
   }
 }
 
 .btn-success {
-  color: black !important;
+  color: #333 !important;
   background-color: white !important;
-  border: black 1.5px solid !important;
+  border: #333 1.5px solid !important;
   margin-bottom: 10px;
+  border-radius: 0 !important;
 
 
   &:hover {
     color: white !important;
-    background-color: black !important;
+    background-color: #333 !important;
     border: white 1px solid !important;
+    border-radius: 0 !important;
   }
 
   &:disabled {

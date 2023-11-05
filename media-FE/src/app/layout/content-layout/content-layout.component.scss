@@ -1,9 +1,14 @@
+//.page-wrapper {
+//  background-image: url('/assets/background/fog.jpg');
+//  background-position-y: center;
+//  background-attachment: fixed;
+//  background-size: cover;
+//  background-repeat: no-repeat;
+//}
+
 .page-wrapper {
-  background-image: url('/assets/background/fog.jpg');
-  background-position-y: center;
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: linear-gradient(to bottom, #007BFF, #00BFFF) fixed;
+  color: #fff;
 }
 
 .container {
