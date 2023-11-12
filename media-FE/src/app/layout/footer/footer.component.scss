@@ -1,7 +1,5 @@
-
-/* Add your custom CSS styles here */
 footer {
-  background-color: #333;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: #fff;
   padding: 20px;
 }
@@ -12,9 +10,11 @@ footer {
   flex-wrap: wrap;
 }
 
-.footer-left, .footer-center, .footer-right {
+.footer-right {
   flex: 1;
   text-align: left;
+  min-width: 300px;
+  margin-left: 10px;
 }
 
 .footer-center {
@@ -53,8 +53,4 @@ button {
 a {
   text-decoration: none;
   color: white;
-
-  &:hover {
-    background-color: gray;
-  }
 }

@@ -1,3 +1,11 @@
+nav {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+#logo-img {
+  width: 80px;
+}
+
 @media only screen and (max-width: 991px) {
   .auth-large {
     display: none;
@@ -8,8 +16,4 @@
   .auth-small {
     display: none;
   }
-}
-
-#logo-img {
-  width: 80px;
 }

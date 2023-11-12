@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicRoutingModule } from "./public.routing";
 import { HomeComponent } from "./page/home/home.component";
-import { OrganizerComponent } from './page/organizer/organizer.component';
+import { MentorsComponent } from './page/mentors/mentors.component';
 import { ContactComponent } from './page/contact/contact.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    OrganizerComponent,
+    MentorsComponent,
     ContactComponent
   ],
   imports: [

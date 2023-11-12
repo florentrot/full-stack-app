@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../../../assets/img/logo.png" alt="Media App" id="logo-img"></a>
+    <a class="navbar-brand" href="#"><img src="../../../assets/img/logo-2.png" alt="Media App" id="logo-img"></a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,19 +18,19 @@
         </li>
         <li class="nav-item">
                 <a
-                  routerLink="/public/about"
+                  routerLink="/public/home"
                   class="nav-link text-black"
-                  [ngClass]="{'active': isButtonActive('/public/about') }"
+                  [ngClass]="{'active': isButtonActive('/public/home') }"
                   aria-current="page"
-                >Despre Noi</a>
+                >About Us</a>
         </li>
         <li class="nav-item">
                 <a
-                  routerLink="/public/organizer"
+                  routerLink="/public/mentors"
                   class="nav-link text-black"
-                  [ngClass]="{'active': isButtonActive('/public/organizer') }"
+                  [ngClass]="{'active': isButtonActive('/public/mentors') }"
                   aria-current="page"
-                >Mentorat & Coaching</a>
+                >Mentoring & Coaching</a>
         </li>
         <li class="nav-item">
                 <a
@@ -45,13 +45,13 @@
           <a
             routerLink="/auth/login"
             class="nav-link auth-small text-black"
-          >Logare</a>
+          >Login</a>
         </li>
         <li class="nav-item">
           <a
             routerLink="/auth/register"
             class="nav-link auth-small text-black"
-          >Înregistrare</a>
+          >Register</a>
         </li>
         </ng-template>
         <ng-template #showLogout><a class="nav-link auth-small" style="cursor: pointer" (click)="logout()">Logout</a></ng-template>
@@ -59,14 +59,14 @@
       </ul>
 
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Caută" aria-label="Search">
-        <button class="btn btn-outline-success me-2" type="submit">Caută</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success me-2" type="submit">Search</button>
       </form>
 
       <ng-container *ngIf="!isAuthenticated; then showLoginRegisterLarge; else showLogoutLarge"></ng-container>
       <ng-template #showLoginRegisterLarge>
-        <a routerLink="/auth/login" class="btn btn-outline-success me-2 auth-large">Logare</a>
-        <a routerLink="/auth/register" class="btn btn-outline-success me-2 auth-large">Înregistrare</a>
+        <a routerLink="/auth/login" class="btn btn-outline-success me-2 auth-large">Login</a>
+        <a routerLink="/auth/register" class="btn btn-outline-success me-2 auth-large">Register</a>
       </ng-template>
       <ng-template #showLogoutLarge><a class="btn btn-outline-success me-2 auth-large" (click)="logout()">Logout</a></ng-template>
 
