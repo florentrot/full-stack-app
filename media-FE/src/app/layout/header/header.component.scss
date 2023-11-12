@@ -16,10 +16,11 @@ nav {
 }
 
 #logo-img {
-  width: 80px;
+  width: 60px;
 }
 
 li>a {
-  color: whitesmoke !important;
+  position: relative;
+  overflow: hidden;
 }
 

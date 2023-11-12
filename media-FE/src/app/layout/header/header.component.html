@@ -11,7 +11,7 @@
               <a
                 *ngIf="isAuthenticated"
                 routerLink="/dashboard/profile"
-                class="nav-link text-black"
+                class="nav-link"
                 [ngClass]="{'active': isButtonActive('/dashboard/profile') }"
                 aria-current="page"
               >Dashboard</a>
@@ -19,7 +19,7 @@
         <li class="nav-item">
                 <a
                   routerLink="/public/home"
-                  class="nav-link text-black"
+                  class="nav-link"
                   [ngClass]="{'active': isButtonActive('/public/home') }"
                   aria-current="page"
                 >About Us</a>
@@ -27,7 +27,7 @@
         <li class="nav-item">
                 <a
                   routerLink="/public/mentors"
-                  class="nav-link text-black"
+                  class="nav-link"
                   [ngClass]="{'active': isButtonActive('/public/mentors') }"
                   aria-current="page"
                 >Mentoring & Coaching</a>
@@ -35,7 +35,7 @@
         <li class="nav-item">
                 <a
                   routerLink="/public/contact"
-                  class="nav-link text-black"
+                  class="nav-link"
                   [ngClass]="{'active': isButtonActive('/public/contact') }"
                 >Contact</a>
         </li>
@@ -44,13 +44,13 @@
         <li class="nav-item">
           <a
             routerLink="/auth/login"
-            class="nav-link auth-small text-black"
+            class="nav-link auth-small"
           >Login</a>
         </li>
         <li class="nav-item">
           <a
             routerLink="/auth/register"
-            class="nav-link auth-small text-black"
+            class="nav-link auth-small"
           >Register</a>
         </li>
         </ng-template>

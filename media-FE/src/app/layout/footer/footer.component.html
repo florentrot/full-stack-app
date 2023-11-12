@@ -1,5 +1,5 @@
 <footer>
-  <div class="footer-content">
+  <div class="footer-content" *ngIf="isAuthRoute">
 
     <div class="footer-right">
       <h4>Contact</h4>
@@ -23,22 +23,21 @@
     <div class="footer-right">
       <h4>Company</h4>
       <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+        <li>Privacy Policy</li>
+        <li>Terms & Conditions</li>
       </ul>
     </div>
   </div>
 
 
-  <div class="email-form">
+  <div class="email-form" *ngIf="isAuthRoute">
     <h4>Subscribe for weekly updates</h4>
     <form action="#" method="post">
       <input type="email" name="email" placeholder="Enter your email address" required>
-      <button class="btn btn-success">Subscribe</button>
     </form>
   </div>
 
   <div class="footer-copyright">
-    © 2023 Guidance and Coaching for Romania. All Rights Reserved.
+    © {{currentYear}} Mentoring and Coaching for Romania. All Rights Reserved.
   </div>
 </footer>
