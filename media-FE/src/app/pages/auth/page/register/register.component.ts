@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
 import { RegisterService } from "../../../../core/service/register.service";
+import {LoadingService} from "../../../../shared/service/loading.service";
+import {ErrorNotificationComponent} from "../../../../shared/error-notification/error-notification.component";
 
 @Component({
   selector: 'app-register',
@@ -11,12 +13,14 @@ import { RegisterService } from "../../../../core/service/register.service";
 })
 export class RegisterComponent {
   registrationForm: FormGroup | any;
-  isLoading: boolean = false;
+
+  @ViewChild('errorHandler') errorHandler  = new ErrorNotificationComponent;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
+    public loadingService: LoadingService,
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -34,21 +38,24 @@ export class RegisterComponent {
   onRegister() {
     if (this.registrationForm.valid) {
       const registrationData: RegisterRequestDTO = this.registrationForm.value;
-      this.registerService.register(registrationData).subscribe({
-        next: (tokenResponse) => {
-          if (tokenResponse.token) {
-            this.router.navigate(['auth/login']);
-          }
-        },
-        error: (error) => {
-          console.error('Registration failed:', error);
-        },
-      });
+      this.loadingService.show();
+
+      //simulate waiting for response
+      setTimeout(() => {
+        this.registerService.register(registrationData).subscribe({
+          next: (tokenResponse) => {
+            if (tokenResponse.token) {
+              this.router.navigate(['auth/login']);
+              this.loadingService.hide();
+            }
+          },
+          error: (error) => {
+            this.errorHandler.displayError(error);
+            this.loadingService.hide();
+          },
+        });
+      }, 1500);
     }
   }
-
-  // isButtonActive(route: string): boolean {
-  //   return this.router.url.includes(route);
-  // }
 
 }

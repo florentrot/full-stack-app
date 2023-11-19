@@ -1,5 +1,9 @@
 <div class="register-container">
   <h2>Register</h2>
+  <app-error-notification #errorHandler></app-error-notification>
+  <div *ngIf="loadingService.loading$ | async">
+    <app-spinner></app-spinner>
+  </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
     <div class="form-group">
     <label for="firstName">First Name</label>
