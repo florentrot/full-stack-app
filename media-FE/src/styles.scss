@@ -9,48 +9,13 @@
   text-decoration: none;
 }
 
-//override bootstrap buttons
-//.btn-outline-success {
-//  color: #333 !important;
-//  border: #333 1px solid !important;
-//  border-radius: 0 !important;
-//
-//  &:hover {
-//    color: white !important;
-//    background-color: #333 !important;
-//    border-radius: 0 !important;
-//  }
-//}
-//
-//.btn-success {
-//  color: #333 !important;
-//  background-color: white !important;
-//  border: #333 1.5px solid !important;
-//  margin-bottom: 10px;
-//  border-radius: 0 !important;
-//
-//
-//  &:hover {
-//    color: white !important;
-//    background-color: #333 !important;
-//    border: white 1px solid !important;
-//    border-radius: 0 !important;
-//  }
-//
-//  &:disabled {
-//    border: gray 1px solid !important;
-//  }
-//}
-
 .btn-outline-success {
   color: white !important;
   border: white 1px solid !important;
-  border-radius: 0 !important;
 
   &:hover {
     color: white !important;
     background-color: #333 !important;
-    border-radius: 0 !important;
   }
 }
 

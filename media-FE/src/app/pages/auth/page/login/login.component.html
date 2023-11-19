@@ -1,41 +1,32 @@
-<div class="container">
-  <div class="form-container">
-    <h2>Login</h2>
+<div class="login-container">
+  <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div class="form-group">
-              <label for="email">Email address</label>
-              <input
-                type="text"
-                pInputText
-                formControlName="email"
-                field="email"
-                id="email"
-                class="form-control"
-                aria-describedby="emailHelp"
-                placeholder="Enter your email" />
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <label for="email">Email address:</label>
+      <input type="email"
+             class="form-control"
+             id="email"
+             formControlName="email"
+             placeholder="Enter email" required>
     </div>
     <div class="form-group">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                pInputText
-                id="password"
-                field="password"
-                formControlName="password"
-                class="form-control "
-                placeholder="Enter your password" />
+      <label for="password">Password:</label>
+      <input type="password"
+             class="form-control"
+             id="password"
+             formControlName="password"
+             placeholder="Password" required>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="keepLoggedIn">
-      <label class="form-check-label mb-2" for="keepLoggedIn">Keep me logged in</label>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="remember">
+      <label class="form-check-label" for="remember">Remember me for 30 days</label>
     </div>
-          <button
-            type="submit"
-            class="btn btn-success w-25"
+    <button type="submit"
+            class="btn btn-primary"
             [disabled]="isFormInvalid()"
-          >Login</button>
+    >Sign in</button>
   </form>
-        <a routerLink="/auth/register">I don't have an account!</a>
+  <div class="to-register mt-3">
+    <a routerLink="/auth/register">I don't have an account!</a>
   </div>
 </div>

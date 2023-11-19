@@ -1,0 +1,36 @@
+/* Parent container of the cards */
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Allows multiple rows if needed */
+}
+
+/* Individual card containers */
+.col-md-4 {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically inside each column */
+}
+
+
+/* Ensures the image doesn't exceed the card's boundary */
+.card {
+  flex: 1; /* Allows the card to expand and fill the available vertical space */
+  overflow: hidden; /* Add this to your existing .card styles */
+  margin-bottom: 10px;
+}
+
+/* Initial state of the image */
+.card-img-top {
+  transition: transform 0.3s ease-in-out; /* Smooth transition effect */
+  z-index: 0;
+  max-height: 500px;
+}
+
+.card-body {
+  background-color: white;
+  z-index: 1;
+}
+
+/* Hover effect */
+.card-img-top:hover {
+  transform: scale(1.05); /* Slightly increase the size of the image */
+}

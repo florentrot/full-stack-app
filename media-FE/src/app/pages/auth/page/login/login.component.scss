@@ -1,13 +1,35 @@
-.container {
-  width: 30%;
+.login-container {
+  max-width: 400px;
+  margin: auto;
   padding: 20px;
-  border: 1px white solid;
-  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  background: #fff;
+}
 
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  min-width: 350px;
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.to-register {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 a {
@@ -15,3 +37,4 @@ a {
   color: black;
   cursor: pointer;
 }
+

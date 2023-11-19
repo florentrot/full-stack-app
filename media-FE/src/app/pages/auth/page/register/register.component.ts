@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { AuthService } from "../../../../core/service/auth.service";
 import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
 import { RegisterService } from "../../../../core/service/register.service";
 
@@ -23,7 +22,8 @@ export class RegisterComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 

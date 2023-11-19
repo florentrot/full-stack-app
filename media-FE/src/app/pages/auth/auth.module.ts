@@ -8,6 +8,7 @@ import { AutoCompleteModule } from "primeng/autocomplete";
 import { PasswordModule } from "primeng/password";
 import { InputTextModule } from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {SharedModule} from "../../shared/shared.module";
 
 
 
@@ -16,15 +17,16 @@ import {ButtonModule} from "primeng/button";
     LoginComponent,
     RegisterComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    AuthRoutingModule,
-    AutoCompleteModule,
-    FormsModule,
-    PasswordModule,
-    InputTextModule,
-    ButtonModule,
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        AuthRoutingModule,
+        AutoCompleteModule,
+        FormsModule,
+        PasswordModule,
+        InputTextModule,
+        ButtonModule,
+        SharedModule,
+    ]
 })
 export class AuthModule { }
