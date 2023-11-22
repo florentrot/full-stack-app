@@ -13,16 +13,15 @@
 
 /* Ensures the image doesn't exceed the card's boundary */
 .card {
-  flex: 1; /* Allows the card to expand and fill the available vertical space */
-  overflow: hidden; /* Add this to your existing .card styles */
+  flex: 1;
+  overflow: hidden;
   margin-bottom: 10px;
 }
 
-/* Initial state of the image */
 .card-img-top {
-  transition: transform 0.3s ease-in-out; /* Smooth transition effect */
+  transition: transform 0.3s ease-in-out;
   z-index: 0;
-  max-height: 500px;
+  max-height: 400px;
 }
 
 .card-body {

@@ -1,11 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../../core/service/auth.service";
-import {AuthenticationRequestDTO} from "../../../../data/interfaces/AuthenticationRequestDTO";
-import {RegisterRequestDTO} from "../../../../data/interfaces/RegisterRequestDTO";
-import {ErrorNotificationComponent} from "../../../../shared/error-notification/error-notification.component";
-import {LoadingService} from "../../../../shared/service/loading.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "../../../../core/service/auth.service";
+import { AuthenticationRequestDTO } from "../../../../data/interfaces/AuthenticationRequestDTO";
+import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
+import { LoadingService } from "../../../../shared/service/loading.service";
+import { Constants } from "../../../../shared/constants";
+import { NotificationService } from "../../../../shared/service/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,6 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   loginForm: FormGroup | any;
   currentYear = new Date().getFullYear();
-  value: any;
-
-  @ViewChild('errorHandler') errorHandler  = new ErrorNotificationComponent;
-
   authenticationRequest: AuthenticationRequestDTO | undefined;
 
   constructor(
@@ -27,7 +24,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    public loadingService: LoadingService
+    private loadingService: LoadingService,
+    private notificationService: NotificationService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,16 +54,16 @@ export class LoginComponent implements OnInit {
               this.authService.setSession(tokenResponse);
               this.router.navigate(['dashboard']);
               this.loadingService.hide();
+              this.notificationService.displayNotification(Constants.AUTHENTICATED_MSG, Constants.SUCCESS_STYLE);
             }
           },
           error: (error) => {
-            this.errorHandler.displayError('Invalid username/password');
+            this.notificationService.displayNotification(Constants.INVALID_CREDENTIALS_MSG, Constants.ERROR_STYLE);
             console.error('Authentication failed:', error);
             this.loadingService.hide();
           },
         });
       }, 1500);
-
     }
   }
 }

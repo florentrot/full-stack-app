@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {faLinkedin, faFacebook, faYoutube} from "@fortawesome/free-brands-svg-icons";
-import {Router} from "@angular/router";
+import { faLinkedin, faFacebook, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-footer',

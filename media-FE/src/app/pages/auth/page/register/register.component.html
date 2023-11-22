@@ -1,18 +1,14 @@
 <div class="register-container">
   <h2>Register</h2>
-  <app-error-notification #errorHandler></app-error-notification>
-  <div *ngIf="loadingService.loading$ | async">
-    <app-spinner></app-spinner>
-  </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
     <div class="form-group">
-    <label for="firstName">First Name</label>
-    <input
-      type="text"
-      formControlName="firstName"
-      class="form-control"
-      id="firstName"
-      placeholder="Enter your first name"/>
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+        id="firstName"
+        placeholder="Enter your first name"/>
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
@@ -49,14 +45,16 @@
     </div>
     <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="agreeTerms">
-      <label class="form-check-label mb-2 small" for="agreeTerms">By creating an account, you agree to our Terms and have read and acknowledge the Global Privacy Statement.</label>
+      <label class="form-check-label mb-2 small" for="agreeTerms">By creating an account, you agree to our Terms and
+        have read and acknowledge the Global Privacy Statement.</label>
     </div>
     <button type="submit"
             class="btn btn-primary"
             [disabled]="isFormInvalid()"
-            >Sign up</button>
+    >Sign up
+    </button>
   </form>
   <div class="to-register mt-3">
-  <a routerLink="/auth/login">To login page!</a>
+    <a routerLink="/auth/login">To login page!</a>
   </div>
 </div>

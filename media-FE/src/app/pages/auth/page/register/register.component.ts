@@ -1,10 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
 import { RegisterService } from "../../../../core/service/register.service";
-import {LoadingService} from "../../../../shared/service/loading.service";
-import {ErrorNotificationComponent} from "../../../../shared/error-notification/error-notification.component";
+import { LoadingService } from "../../../../shared/service/loading.service";
+import { Constants } from "../../../../shared/constants";
+import { NotificationService } from "../../../../shared/service/notification.service";
 
 @Component({
   selector: 'app-register',
@@ -14,13 +15,12 @@ import {ErrorNotificationComponent} from "../../../../shared/error-notification/
 export class RegisterComponent {
   registrationForm: FormGroup | any;
 
-  @ViewChild('errorHandler') errorHandler  = new ErrorNotificationComponent;
-
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
-    public loadingService: LoadingService,
+    private loadingService: LoadingService,
+    private notificationService: NotificationService
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -47,10 +47,11 @@ export class RegisterComponent {
             if (tokenResponse.token) {
               this.router.navigate(['auth/login']);
               this.loadingService.hide();
+              this.notificationService.displayNotification(Constants.REGISTERED_MSG, Constants.SUCCESS_STYLE);
             }
           },
           error: (error) => {
-            this.errorHandler.displayError(error);
+            this.notificationService.displayNotification(error, Constants.ERROR_STYLE);
             this.loadingService.hide();
           },
         });

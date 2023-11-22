@@ -5,12 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthRoutingModule } from "./auth.routing";
 import { RegisterComponent } from './page/register/register.component';
 import { AutoCompleteModule } from "primeng/autocomplete";
-import { PasswordModule } from "primeng/password";
-import { InputTextModule } from "primeng/inputtext";
-import {ButtonModule} from "primeng/button";
-import {SharedModule} from "../../shared/shared.module";
-
-
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -23,9 +18,6 @@ import {SharedModule} from "../../shared/shared.module";
         AuthRoutingModule,
         AutoCompleteModule,
         FormsModule,
-        PasswordModule,
-        InputTextModule,
-        ButtonModule,
         SharedModule,
     ]
 })

@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
-import {AuthGuard} from "./core/guard/auth.guard";
-import {AuthLayoutComponent} from "./layout/auth-layout/auth-layout.component";
-import {CommonModule} from "@angular/common";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ContentLayoutComponent } from "./layout/content-layout/content-layout.component";
+import { AuthGuard } from "./core/guard/auth.guard";
+import { AuthLayoutComponent } from "./layout/auth-layout/auth-layout.component";
+import { CommonModule } from "@angular/common";
 
 const routes: Routes = [
   { path: '',

@@ -1,9 +1,5 @@
 <div class="login-container">
   <h2>Login</h2>
-  <app-error-notification #errorHandler></app-error-notification>
-  <div *ngIf="loadingService.loading$ | async">
-    <app-spinner></app-spinner>
-  </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
     <div class="form-group">
       <label for="email">Email address:</label>

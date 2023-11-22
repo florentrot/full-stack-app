@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./page/home/home.component";
-import {MentorsComponent} from "./page/mentors/mentors.component";
-import {ContactComponent} from "./page/contact/contact.component";
+import { MentorsComponent } from "./page/mentors/mentors.component";
+import { ContactComponent } from "./page/contact/contact.component";
 
 export const routes: Routes = [
   {
