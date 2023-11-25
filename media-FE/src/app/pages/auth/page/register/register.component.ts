@@ -6,6 +6,7 @@ import { RegisterService } from "../../../../core/service/register.service";
 import { LoadingService } from "../../../../shared/service/loading.service";
 import { Constants } from "../../../../shared/constants";
 import { NotificationService } from "../../../../shared/service/notification.service";
+import {AuthService} from "../../../../core/service/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private loadingService: LoadingService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -45,7 +47,7 @@ export class RegisterComponent {
         this.registerService.register(registrationData).subscribe({
           next: (tokenResponse) => {
             if (tokenResponse.token) {
-              this.router.navigate(['auth/login']);
+              this.router.navigate(['auth/confirm-registration']);
               this.loadingService.hide();
               this.notificationService.displayNotification(Constants.REGISTERED_MSG, Constants.SUCCESS_STYLE);
             }
@@ -55,7 +57,7 @@ export class RegisterComponent {
             this.loadingService.hide();
           },
         });
-      }, 1500);
+      }, 500);
     }
   }
 

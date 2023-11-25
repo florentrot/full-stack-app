@@ -51,10 +51,15 @@ export class LoginComponent implements OnInit {
         this.authService.login(registrationData).subscribe({
           next: (tokenResponse) => {
             if (tokenResponse.token) {
-              this.authService.setSession(tokenResponse);
-              this.router.navigate(['dashboard']);
-              this.loadingService.hide();
-              this.notificationService.displayNotification(Constants.AUTHENTICATED_MSG, Constants.SUCCESS_STYLE);
+              if(tokenResponse.token === Constants.EMAIL_NOT_CONFIRMED) {
+                this.router.navigate(['auth/confirm-registration']);
+                this.loadingService.hide();
+              } else {
+                this.authService.setSession(tokenResponse);
+                this.router.navigate(['dashboard']);
+                this.loadingService.hide();
+                this.notificationService.displayNotification(Constants.AUTHENTICATED_MSG, Constants.SUCCESS_STYLE);
+              }
             }
           },
           error: (error) => {
@@ -63,7 +68,7 @@ export class LoginComponent implements OnInit {
             this.loadingService.hide();
           },
         });
-      }, 1500);
+      }, 500);
     }
   }
 }

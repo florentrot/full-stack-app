@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class User implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    private String verificationCode;
+    private LocalDateTime registrationDate;
+    private boolean isActive;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -64,6 +68,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
     }
 }

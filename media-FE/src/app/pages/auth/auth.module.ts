@@ -6,11 +6,13 @@ import { AuthRoutingModule } from "./auth.routing";
 import { RegisterComponent } from './page/register/register.component';
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { SharedModule } from "../../shared/shared.module";
+import { ConfirmRegistrationComponent } from './page/confirm-registration/confirm-registration.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmRegistrationComponent
   ],
     imports: [
         CommonModule,

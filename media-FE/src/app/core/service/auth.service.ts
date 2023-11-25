@@ -36,11 +36,11 @@ export class AuthService {
     return !isTokenExpired;
   }
 
-  setSession(authDto: AuthDto) {
+  setSession(authDto: AuthDto): void {
     localStorage.setItem('token', 'Bearer ' + authDto.token);
   }
 
-  logout() {
+  logout(): void {
     localStorage.clear();
     this.router.navigate(['public/home']);
   }

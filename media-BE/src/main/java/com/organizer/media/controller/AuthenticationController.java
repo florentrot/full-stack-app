@@ -34,4 +34,9 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
     }
+
+    @PostMapping("/confirmAccount")
+    public ResponseEntity<?> confirmUserAccount(@RequestParam("confirmationCode") String confirmationCode) {
+        return ResponseEntity.ok("test");
+    }
 }

@@ -1,5 +1,6 @@
-package com.organizer.media.exception;
+package com.organizer.media.exception.handler;
 
+import com.organizer.media.exception.EmailAlreadyUsedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

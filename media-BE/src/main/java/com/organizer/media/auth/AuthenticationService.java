@@ -7,13 +7,17 @@ import com.organizer.media.dao.UserRepository;
 import com.organizer.media.entity.Role;
 import com.organizer.media.entity.User;
 import com.organizer.media.exception.EmailAlreadyUsedException;
+import com.organizer.media.utils.Constants;
+import com.organizer.media.utils.Utils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -32,25 +36,33 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .isActive(false)
+                .verificationCode(generateCode())
+                .registrationDate(LocalDateTime.now())
                 .build();
 
-        if (!isEmailUnique(request)) {
-            throw new EmailAlreadyUsedException("This email is already in use.");
-        }
-
+        checkEmailAvailable(request);
         repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+                .token(Constants.EMAIL_NOT_CONFIRMED)
                 .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword())
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword())
+            );
+        } catch (AccountStatusException e) {
+            if (e instanceof DisabledException) {
+                return AuthenticationResponse.builder()
+                        .token(Constants.EMAIL_NOT_CONFIRMED)
+                        .build();
+            }
+        }
+
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
@@ -59,7 +71,14 @@ public class AuthenticationService {
                 .build();
     }
 
-    private boolean isEmailUnique(RegisterRequest request) {
-        return repository.findByEmail(request.getEmail()).isEmpty();
+    private void checkEmailAvailable(RegisterRequest request) {
+       if (repository.findByEmail(request.getEmail()).isPresent()) {
+           throw new EmailAlreadyUsedException(Constants.UNAVAILABLE_EMAIL);
+       }
     }
+
+    private String generateCode() {
+        return Utils.generateUUID().replace("-","");
+    }
+
 }
