@@ -2,10 +2,13 @@ package com.organizer.media.controller;
 
 import com.organizer.media.dto.AuthenticationRequest;
 import com.organizer.media.dto.AuthenticationResponse;
+import com.organizer.media.dto.ConfirmationEmailRequest;
 import com.organizer.media.dto.RegisterRequest;
 import com.organizer.media.auth.AuthenticationService;
 import com.organizer.media.exception.EmailAlreadyUsedException;
+import com.organizer.media.exception.InvalidValidationCodeException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,19 +27,33 @@ public class AuthenticationController {
         } catch (EmailAlreadyUsedException e) {
             throw e;
         } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred");
+            return internalServerError();
+        }
+    }
+
+    @PostMapping("/confirmAccount")
+    public ResponseEntity<?> confirmUserAccount(@RequestBody ConfirmationEmailRequest request) {
+        try {
+            return ResponseEntity.ok(service.confirmAccount(request));
+        } catch (InvalidValidationCodeException e) {
+            throw e;
+        } catch (Exception e) {
+            return internalServerError();
         }
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(service.authenticate(request));
+    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
+        try {
+            return ResponseEntity.ok(service.authenticate(request));
+        } catch (Exception e) {
+            return internalServerError();
+        }
     }
 
-    @PostMapping("/confirmAccount")
-    public ResponseEntity<?> confirmUserAccount(@RequestParam("confirmationCode") String confirmationCode) {
-        return ResponseEntity.ok("test");
+    private ResponseEntity<String> internalServerError() {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("An error occurred");
     }
 }

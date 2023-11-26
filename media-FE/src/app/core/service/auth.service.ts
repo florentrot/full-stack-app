@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   login(authRequest: AuthenticationRequestDTO): Observable<any> {
@@ -34,6 +34,15 @@ export class AuthService {
   isTokenValid(token: string): boolean {
     const isTokenExpired = this.jwtHelper.isTokenExpired(token);
     return !isTokenExpired;
+  }
+
+  isAccountInactive(): boolean {
+    const token = localStorage.getItem('token')?.replace('Bearer ', '');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken.active === false;
+    }
+    return false;
   }
 
   setSession(authDto: AuthDto): void {

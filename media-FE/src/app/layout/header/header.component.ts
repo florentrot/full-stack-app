@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAuthenticated = this.authService.isAuthenticated();
+    this.isAuthenticated = this.authService.isAuthenticated() && !this.authService.isAccountInactive();
   }
 
   isButtonActive(route: string): boolean {
@@ -26,4 +26,19 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
+  goToLoginPage() {
+    if(this.authService.isAuthenticated() && this.authService.isAccountInactive()) {
+      this.router.navigate(['/auth/confirm-registration']);
+    } else {
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
+  goToRegisterPage() {
+    if(this.authService.isAuthenticated() && this.authService.isAccountInactive()) {
+      this.router.navigate(['/auth/confirm-registration']);
+    } else {
+      this.router.navigate(['/auth/register']);
+    }
+  }
 }

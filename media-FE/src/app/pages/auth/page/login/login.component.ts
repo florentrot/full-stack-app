@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../../../core/service/auth.service";
-import { AuthenticationRequestDTO } from "../../../../data/interfaces/AuthenticationRequestDTO";
-import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
-import { LoadingService } from "../../../../shared/service/loading.service";
-import { Constants } from "../../../../shared/constants";
-import { NotificationService } from "../../../../shared/service/notification.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {AuthService} from "../../../../core/service/auth.service";
+import {AuthenticationRequestDTO} from "../../../../data/interfaces/AuthenticationRequestDTO";
+import {RegisterRequestDTO} from "../../../../data/interfaces/RegisterRequestDTO";
+import {LoadingService} from "../../../../shared/service/loading.service";
+import {Constants} from "../../../../shared/constants";
+import {NotificationService} from "../../../../shared/service/notification.service";
+import {RegisterService} from "../../../../core/service/register.service";
 
 @Component({
   selector: 'app-login',
@@ -21,9 +22,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private registerService: RegisterService,
     private loadingService: LoadingService,
     private notificationService: NotificationService
   ) {
@@ -34,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.clear();
   }
 
   isFormInvalid() {
@@ -51,15 +51,10 @@ export class LoginComponent implements OnInit {
         this.authService.login(registrationData).subscribe({
           next: (tokenResponse) => {
             if (tokenResponse.token) {
-              if(tokenResponse.token === Constants.EMAIL_NOT_CONFIRMED) {
-                this.router.navigate(['auth/confirm-registration']);
-                this.loadingService.hide();
-              } else {
                 this.authService.setSession(tokenResponse);
                 this.router.navigate(['dashboard']);
                 this.loadingService.hide();
                 this.notificationService.displayNotification(Constants.AUTHENTICATED_MSG, Constants.SUCCESS_STYLE);
-              }
             }
           },
           error: (error) => {

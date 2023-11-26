@@ -20,9 +20,9 @@ export class RegisterComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
+    private authService: AuthService,
     private loadingService: LoadingService,
-    private notificationService: NotificationService,
-    private authService: AuthService
+    private notificationService: NotificationService
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -47,6 +47,7 @@ export class RegisterComponent {
         this.registerService.register(registrationData).subscribe({
           next: (tokenResponse) => {
             if (tokenResponse.token) {
+              this.authService.setSession(tokenResponse);
               this.router.navigate(['auth/confirm-registration']);
               this.loadingService.hide();
               this.notificationService.displayNotification(Constants.REGISTERED_MSG, Constants.SUCCESS_STYLE);

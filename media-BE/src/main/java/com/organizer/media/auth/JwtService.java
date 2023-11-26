@@ -35,6 +35,8 @@ public class JwtService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+
+        extraClaims.put("active", userDetails.isEnabled());
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
