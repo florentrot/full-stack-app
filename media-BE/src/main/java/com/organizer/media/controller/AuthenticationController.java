@@ -1,14 +1,12 @@
 package com.organizer.media.controller;
 
 import com.organizer.media.dto.AuthenticationRequest;
-import com.organizer.media.dto.AuthenticationResponse;
 import com.organizer.media.dto.ConfirmationEmailRequest;
 import com.organizer.media.dto.RegisterRequest;
 import com.organizer.media.auth.AuthenticationService;
 import com.organizer.media.exception.EmailAlreadyUsedException;
 import com.organizer.media.exception.InvalidValidationCodeException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
