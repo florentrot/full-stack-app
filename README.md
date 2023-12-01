@@ -24,3 +24,8 @@ Pentru Lista de Sarcini (To Do List):\
 6. subscribe to newsletters from footer\
 7. contact component functionality + apis\
 8. implement payment with stripe (demo, not real)\
+9. logging
+10. gdpr
+11. coockies
+12. ip check sau antispam
+13. Connection configuration (max connection, timeout, and so on)
