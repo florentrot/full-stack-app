@@ -9,7 +9,7 @@ import com.organizer.media.entity.Role;
 import com.organizer.media.entity.User;
 import com.organizer.media.exception.EmailAlreadyUsedException;
 import com.organizer.media.exception.InvalidValidationCodeException;
-import com.organizer.media.service.EmailService;
+import com.organizer.media.service.NotificationService;
 import com.organizer.media.utils.Constants;
 import com.organizer.media.utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    private final EmailService emailService;
+    private final NotificationService notificationService;
 
 
     public AuthenticationResponse register(RegisterRequest request) throws EmailAlreadyUsedException {
@@ -55,7 +55,7 @@ public class AuthenticationService {
 
         checkEmailAvailable(request);
         repository.save(user);
-        emailService.sendConfirmationEmail(request, verificationCode);
+        notificationService.sendConfirmationNotification(request, verificationCode);
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
@@ -118,7 +118,7 @@ public class AuthenticationService {
         confirmedUser.setActive(true);
         confirmedUser.setVerificationCode(null);
         repository.save(confirmedUser);
-        emailService.sendWelcomeEmail(confirmedUser);
+        notificationService.sendWelcomeNotification(confirmedUser);
         var jwtToken = jwtService.generateToken(confirmedUser);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

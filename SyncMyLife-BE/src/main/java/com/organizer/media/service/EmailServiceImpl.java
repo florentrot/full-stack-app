@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmailService implements NotificationService{
+public class EmailServiceImpl implements NotificationService{
 
     private final JavaMailSender mailSender;
 
@@ -21,7 +21,7 @@ public class EmailService implements NotificationService{
 
     @Override
     @Async
-    public void sendEmail(String to, String subject, String content) {
+    public void sendNotification(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(appEmail);
         message.setTo(to);
@@ -30,7 +30,7 @@ public class EmailService implements NotificationService{
         mailSender.send(message);
     }
 
-    public void sendConfirmationEmail(RegisterRequest request, String confirmationCode) {
+    public void sendConfirmationNotification(RegisterRequest request, String confirmationCode) {
         String fullName = request.getFirstName() + " " + request.getLastName();
 
         String emailContent = """
@@ -39,10 +39,10 @@ public class EmailService implements NotificationService{
                 I will expire after 24 hours.
                 """.formatted(fullName, confirmationCode);
 
-        sendEmail(request.getEmail(), Constants.VALIDATION_EMAIL_TITLE, emailContent);
+        sendNotification(request.getEmail(), Constants.VALIDATION_EMAIL_TITLE, emailContent);
     }
 
-    public void sendWelcomeEmail(User user) {
+    public void sendWelcomeNotification(User user) {
         String fullName = user.getFirstName() + " " + user.getLastName();
 
         String emailContent = """
@@ -51,6 +51,6 @@ public class EmailService implements NotificationService{
                 Your account is active now!
                 """.formatted(fullName);
 
-        sendEmail(user.getEmail(), Constants.WELCOME_EMAIL, emailContent);
+        sendNotification(user.getEmail(), Constants.WELCOME_EMAIL, emailContent);
     }
 }
