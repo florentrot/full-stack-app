@@ -1,76 +1,76 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Media App" id="logo-img"></a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-              <a
-                *ngIf="isAuthenticated"
-                routerLink="/dashboard/profile"
-                class="nav-link"
-                [ngClass]="{'active': isButtonActive('/dashboard/profile') }"
-                aria-current="page"
-              >Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a
-            *ngIf="isAuthenticated"
-            routerLink="/dashboard/social-hub"
-            class="nav-link"
-            [ngClass]="{'active': isButtonActive('/dashboard/social-hub') }"
-            aria-current="page"
-          >Social Hub</a>
-        </li>
-        <li class="nav-item">
-                <a
-                  routerLink="/public/home"
-                  class="nav-link"
-                  [ngClass]="{'active': isButtonActive('/public/home') }"
-                  aria-current="page"
-                >About Us</a>
-        </li>
-        <li class="nav-item">
-                <a
-                  routerLink="/public/contact"
-                  class="nav-link"
-                  [ngClass]="{'active': isButtonActive('/public/contact') }"
-                >Contact</a>
-        </li>
-        <ng-container *ngIf="!isAuthenticated; then showLoginRegister; else showLogout"></ng-container>
-        <ng-template #showLoginRegister>
-        <li class="nav-item">
-          <a
-            (click)="goToLoginPage()"
-            class="nav-link auth-small"
-          >Login</a>
-        </li>
-        <li class="nav-item">
-          <a
-            (click)="goToRegisterPage()"
-            class="nav-link auth-small"
-          >Register</a>
-        </li>
-        </ng-template>
-        <ng-template #showLogout><a class="nav-link auth-small" style="cursor: pointer" (click)="logout()">Logout</a></ng-template>
 
+    <!-- Navbar Brand -->
+    <a class="navbar-brand auth-large" href="#"><img src="assets/img/logo.png" alt="Media App" id="logo-img"></a>
+
+    <!-- User Dropdown for Authenticated Users -->
+    <div class="dropdown auth-small" *ngIf="isAuthenticated">
+      <img src="assets/profile/mock.jpg" alt="User" class="user-image" id="userDropdown" data-bs-toggle="dropdown">
+      <ul class="dropdown-menu dropdown-menu-img" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="#">User Settings</a></li>
+        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Navbar Collapse -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Workspace Dropdown for Authenticated Users -->
+        <li class="nav-item dropdown" *ngIf="isAuthenticated">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Workspace
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/dashboard/profile">Dashboard</a></li>
+            <li><a class="dropdown-item" routerLink="/dashboard/social-hub">Social Hub</a></li>
+            <li><a class="dropdown-item" href="#">To be continue...</a></li>
+          </ul>
+        </li>
+
+        <!-- Static Nav Items -->
+        <li class="nav-item">
+          <a routerLink="/public/home" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/public/contact" class="nav-link">Contact</a>
+        </li>
+
+        <!-- Login/Register for Unauthenticated Users -->
+        <ng-container *ngIf="!isAuthenticated">
+          <li class="nav-item">
+            <a (click)="goToLoginPage()" class="nav-link auth-small">Login</a>
+          </li>
+          <li class="nav-item">
+            <a (click)="goToRegisterPage()" class="nav-link auth-small">Register</a>
+          </li>
+        </ng-container>
       </ul>
 
+      <!-- Search Form -->
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success me-2" type="submit">Search</button>
       </form>
 
-      <ng-container *ngIf="!isAuthenticated; then showLoginRegisterLarge; else showLogoutLarge"></ng-container>
-      <ng-template #showLoginRegisterLarge>
+      <!-- Large Screen Auth Buttons -->
+      <ng-container *ngIf="!isAuthenticated">
         <a routerLink="/auth/login" class="btn btn-outline-success me-2 auth-large">Login</a>
         <a routerLink="/auth/register" class="btn btn-outline-success me-2 auth-large">Register</a>
-      </ng-template>
-      <ng-template #showLogoutLarge><a class="btn btn-outline-success me-2 auth-large" (click)="logout()">Logout</a></ng-template>
+      </ng-container>
 
+      <!-- User Dropdown for Large Screens -->
+      <div class="dropdown auth-large" *ngIf="isAuthenticated">
+        <img src="assets/profile/mock.jpg" alt="User" class="user-image" id="userDropdown" data-bs-toggle="dropdown">
+        <ul class="dropdown-menu dropdown-menu-img" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="#">User Settings</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
