@@ -4,12 +4,12 @@ import com.organizer.media.dto.AuthenticationRequest;
 import com.organizer.media.dto.AuthenticationResponse;
 import com.organizer.media.dto.ConfirmationEmailRequest;
 import com.organizer.media.dto.RegisterRequest;
-import com.organizer.media.dao.UserRepository;
+import com.organizer.media.dao.UserDao;
 import com.organizer.media.entity.Role;
 import com.organizer.media.entity.User;
 import com.organizer.media.exception.EmailAlreadyUsedException;
 import com.organizer.media.exception.InvalidValidationCodeException;
-import com.organizer.media.service.EmailService;
+import com.organizer.media.service.impl.EmailService;
 import com.organizer.media.utils.Constants;
 import com.organizer.media.utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class AuthenticationService {
     @Value("${validation.expire.in.minutes}")
     private String validationDuration;
 
-    private final UserRepository repository;
+    private final UserDao repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;

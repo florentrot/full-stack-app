@@ -1,7 +1,8 @@
-package com.organizer.media.service;
+package com.organizer.media.service.impl;
 
 import com.organizer.media.dto.RegisterRequest;
 import com.organizer.media.entity.User;
+import com.organizer.media.service.NotificationService;
 import com.organizer.media.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmailService implements NotificationService{
+public class EmailService implements NotificationService {
 
     private final JavaMailSender mailSender;
 
