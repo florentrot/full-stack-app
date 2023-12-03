@@ -14,6 +14,8 @@ import { CommonModule } from "@angular/common";
 import { DataModule } from "./data/data.module";
 import { HeaderAuthComponent } from "./layout/header-auth/header-auth.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ShareService} from "./shared/service/share.service";
+import {DataService} from "./data/data.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PublicModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [ShareService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

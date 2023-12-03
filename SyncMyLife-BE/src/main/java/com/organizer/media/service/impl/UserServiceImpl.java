@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 @AllArgsConstructor
+@Service
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;

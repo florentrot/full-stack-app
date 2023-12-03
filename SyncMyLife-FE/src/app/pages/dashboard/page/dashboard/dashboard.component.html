@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="card">
     <div class="card-header">
-      <h1 class="display-4">Hi {{username}}! This is your Dashboard</h1>
+      <h1 class="display-4">Hi {{_user?.firstName || 'User'}}! This is your Dashboard</h1>
     </div>
     <div class="card-body">
       <div class="row">

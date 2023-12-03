@@ -3,7 +3,6 @@ package com.organizer.media.controller;
 import com.organizer.media.entity.User;
 import com.organizer.media.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/user")
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class UserController {
     private UserService userService;
