@@ -17,6 +17,7 @@
 }
 
 .btn-confirm {
+  min-width: 150px;
   background-color: #2c5364;
   color: white;
   padding: 10px 20px;
@@ -29,3 +30,20 @@
 .btn-confirm:hover {
   background-color: #203a43;
 }
+
+.resend-code {
+  max-width: 200px;
+
+  a {
+    font-style: italic;
+    cursor: pointer;
+
+    &:hover {
+      color: #E64A19;
+      transition: 0.2s;
+    }
+  }
+}
+
+
+
