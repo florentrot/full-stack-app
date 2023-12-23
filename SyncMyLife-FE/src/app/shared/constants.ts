@@ -5,5 +5,6 @@ export const Constants = {
   AUTHENTICATED_MSG: "Successfully authenticated!",
   CONFIRM_REGISTRATION_MSG: "Email confirmed successfully!",
   INVALID_CREDENTIALS_MSG: "Invalid username/password",
-  EMAIL_NOT_CONFIRMED: "Email not confirmed"
+  EMAIL_NOT_CONFIRMED: "Email not confirmed",
+  CONFIRM_RESEND_VERIFICATION_CODE: "The verification code has been resubmitted successfully!",
 }

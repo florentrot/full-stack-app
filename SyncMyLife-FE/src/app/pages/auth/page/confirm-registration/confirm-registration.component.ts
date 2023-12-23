@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoadingService} from "../../../../shared/service/loading.service";
@@ -55,7 +55,12 @@ export class ConfirmRegistrationComponent {
     }
   }
 
-  isFormInvalid() {
+  isSubmitButtonDisabled() {
     return !this.confirmForm.valid;
+  }
+
+  resendCode() {
+    // todo:
+    this.notificationService.displayNotification(Constants.CONFIRM_RESEND_VERIFICATION_CODE, Constants.SUCCESS_STYLE);
   }
 }

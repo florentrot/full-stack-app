@@ -11,13 +11,20 @@
              class="form-control"
              id="verificationCode"
              formControlName="verificationCode"
-             placeholder="Enter validation Code" required>
+             placeholder="Enter validation Code"
+             required>
+    </div>
+    <div class="row justify-content-between">
+      <button type="submit"
+              class="btn btn-confirm col-2"
+              [disabled]="isSubmitButtonDisabled()"
+      >Confirm
+      </button>
+      <div class="col align-self-center resend-code">
+        <a (click)="resendCode()">Resend verification code!</a>
+      </div>
     </div>
 
-    <button type="submit"
-            class="btn-confirm"
-            [disabled]="isFormInvalid()"
-    >Confirm</button>
   </form>
 
 </div>
