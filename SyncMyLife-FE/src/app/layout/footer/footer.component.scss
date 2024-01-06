@@ -2,8 +2,8 @@ footer {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: #fff;
   padding: 20px 0;
-  text-align: center; /* Center-align the text */
-  font-size: 14px; /* Smaller font size */
+  text-align: center;
+  font-size: 14px;
   position: relative;
   bottom: 0;
   width: 100%;
@@ -14,8 +14,8 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   max-width: 1200px;
-  margin: auto; /* Center the content */
-  padding: 0 20px; /* Padding on the sides */
+  margin: auto;
+  padding: 0 20px;
 }
 
 .footer-right {

@@ -10,31 +10,63 @@ export class AuthGuard {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const url: string = route.url.join('/');
 
-    if (!this.authService.isAuthenticated() && !url.includes('login') && !url.includes('register')) {
-      this.router.navigate(['/public/home']);
-      return false;
-    } else if (!this.authService.isAuthenticated() && (url.includes('login') || url.includes('register'))) {
-      return true;
-    } else if (this.authService.isAuthenticated() && this.authService.isAccountInactive() && (url.includes('login') || url.includes('register'))) {
-      this.router.navigate(['/auth/confirm-registration']);
-      return false;
-    } else if (this.authService.isAuthenticated()) {
-      if (url.includes('dashboard')) {
-        if (this.authService.isAccountInactive()) {
-          this.router.navigate(['/auth/confirm-registration']);
-           return true;
-        }
+    if (this.isNotAuthenticated()) {
+      if(this.isNotLoginOrRegister(url)) {
+        this.router.navigate(['/public/home']);
+        return false;
       }
-
-      if (!this.authService.isAccountInactive() && (url.includes('login') || url.includes('register') || url.includes('confirm-registration'))) {
-        this.router.navigate(['/dashboard/profile']);
+      if (this.isTryingAuthAccess(url)) {
         return true;
       }
-
-      if (this.authService.isAccountInactive() && url.includes('confirm-registration')) {
+    } else {
+      if (this.isInactive()) {
+        if(this.isTryingAuthAccess(url)) {
+          this.router.navigate(['/auth/confirm-registration']);
+          return false;
+        }
+        if (this.isTryingPrivateAccess(url)) {
+          this.router.navigate(['/auth/confirm-registration']);
+          return false;
+        }
+        if (this.isTryingConfirmAccess(url)) {
+          return true;
+        }
+      } else {
+        if (this.isTryingAuthOrConfirmAccess(url)) {
+          this.router.navigate(['/dashboard/profile']);
+          return true;
+        }
         return true;
       }
     }
-    return true;
+    return false;
+  }
+
+  isNotAuthenticated() {
+    return !this.authService.isAuthenticated();
+  }
+
+  isInactive() {
+    return this.authService.isAccountInactive();
+  }
+
+  isNotLoginOrRegister(url: string) {
+    return !url.includes('login') && !url.includes('register');
+  }
+
+  isTryingAuthAccess(url: string) {
+    return url.includes('login') || url.includes('register');
+  }
+
+  isTryingPrivateAccess(url: string) {
+    return url.includes('dashboard');
+  }
+
+  isTryingAuthOrConfirmAccess(url: string) {
+    return url.includes('login') || url.includes('register') || url.includes('confirm-registration');
+  }
+
+  isTryingConfirmAccess(url: string) {
+    return url.includes('confirm-registration');
   }
 }

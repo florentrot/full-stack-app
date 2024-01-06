@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from "./page/dashboard/dashboard.component";
-import {SocialHubComponent} from "../public/page/mentors/social-hub.component";
+import {SocialHubComponent} from "../public/page/social-hub/social-hub.component";
 
 export const routes: Routes = [
   {
