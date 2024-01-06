@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { Endpoints } from "../../data/endpoints";
-import { AuthDto } from "../../data/interfaces/AuthDto";
-import { Observable } from "rxjs/internal/Observable";
-import { JwtHelperService } from "@auth0/angular-jwt";
-import { AuthenticationRequestDTO } from "../../data/interfaces/AuthenticationRequestDTO";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {Endpoints} from "../../data/endpoints";
+import {AuthDto} from "../../data/interfaces/AuthDto";
+import {Observable} from "rxjs/internal/Observable";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {AuthenticationRequestDTO} from "../../data/interfaces/AuthenticationRequestDTO";
+import {UserLocalData} from "../../data/interfaces/User";
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,15 @@ export class AuthService {
   logout(): void {
     localStorage.clear();
     this.router.navigate(['public/home']);
+  }
+
+  gelLocalUserData(): UserLocalData | null{
+    const token = localStorage.getItem('token')?.replace('Bearer ', '');
+    if (token) {
+      return <UserLocalData>this.jwtHelper.decodeToken(token);
+    }
+    else {
+      return null;
+    }
   }
 }
