@@ -6,17 +6,8 @@ import {UserService} from "./shared/service/user.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'media-FE';
 
-  constructor(private userService: UserService) {
-  }
-
-  ngOnInit(): void {
-    this.initialConfiguration();
-  }
-
-  initialConfiguration(): void {
-    this.userService.fetchLoggedInUserData();
-  }
+  constructor() {}
 }

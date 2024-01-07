@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../core/service/auth.service";
+import {UserService} from "../../shared/service/user.service";
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,17 @@ import {AuthService} from "../../core/service/auth.service";
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {
-  }
+  constructor(private router: Router,
+              private authService: AuthService,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated() && !this.authService.isAccountInactive();
+    this.initialConfiguration();
+  }
+
+  initialConfiguration(): void {
+    this.userService.fetchLoggedInUserData();
   }
 
   isButtonActive(route: string): boolean {
