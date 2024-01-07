@@ -4,7 +4,6 @@ import { LoginComponent } from "./page/login/login.component";
 import { RegisterComponent } from "./page/register/register.component";
 import { ConfirmRegistrationComponent } from "./page/confirm-registration/confirm-registration.component";
 import { AuthGuard } from "../../core/guard/auth.guard";
-import {ProfileComponent} from "./page/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -29,11 +28,6 @@ const routes: Routes = [
         path: 'confirm-registration',
         component: ConfirmRegistrationComponent,
         canActivate: [AuthGuard],
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: '**',

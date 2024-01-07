@@ -28,7 +28,6 @@ export class UserService {
     if(localUserData && localUserData.sub && this.authService.isAuthenticated()){
       this.dataService.getUserByEmail(localUserData.sub).subscribe(user => {
         this.setUser(user);
-        console.log(user);
       });
     }
     else {

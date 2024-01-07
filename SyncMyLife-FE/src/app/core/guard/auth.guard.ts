@@ -59,7 +59,7 @@ export class AuthGuard {
   }
 
   isTryingPrivateAccess(url: string) {
-    return url.includes('dashboard');
+    return url.includes('dashboard' || 'user-management');
   }
 
   isTryingAuthOrConfirmAccess(url: string) {

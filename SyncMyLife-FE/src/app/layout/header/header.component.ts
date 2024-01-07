@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
 
   goToProfilePage(){
     if(this.authService.isAuthenticated()) {
-      this.router.navigate(['/auth/profile']);
+      this.router.navigate(['/user-management/profile']);
     } else {
       this.router.navigate(['/public/home']);
     }

@@ -27,6 +27,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'user-management',
+    component: ContentLayoutComponent,
+    loadChildren: () => import('./pages/user-management/user-management.module').then((m) => m.UserManagementModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     redirectTo: 'public'
   },
