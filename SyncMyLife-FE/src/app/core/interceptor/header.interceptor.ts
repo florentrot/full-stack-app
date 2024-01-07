@@ -23,7 +23,7 @@ export class HeaderInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (!request.url.includes('/api/v1/auth/')) {
+    if (!request.url.includes('/api/v1/auth/') || request.url.includes('/api/v1/auth/resendValidationCode')) {
       request = this.addToken(request);
     }
     return next.handle(request).pipe(

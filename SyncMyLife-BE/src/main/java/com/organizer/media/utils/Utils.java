@@ -4,11 +4,27 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.Base64;
+import java.util.Random;
 import java.util.UUID;
 import java.util.function.Consumer;
 
 @Slf4j
 public class Utils {
+
+    private static final int CODE_LENGTH = 6;
+    private static final String DIGITS = "0123456789";
+
+    public static String generateConfirmationCode() {
+        StringBuilder codeBuilder = new StringBuilder(CODE_LENGTH);
+        Random random = new Random();
+
+        for (int i = 0; i < CODE_LENGTH; i++) {
+            int randomIndex = random.nextInt(DIGITS.length());
+            char randomDigit = DIGITS.charAt(randomIndex);
+            codeBuilder.append(randomDigit);
+        }
+        return codeBuilder.toString();
+    }
 
     public static String generateUUID() {
         return UUID.randomUUID().toString();

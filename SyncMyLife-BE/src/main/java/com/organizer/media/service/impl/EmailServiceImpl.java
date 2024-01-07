@@ -1,6 +1,6 @@
 package com.organizer.media.service.impl;
 
-import com.organizer.media.dto.RegisterRequest;
+import com.organizer.media.dto.RegisterRequestDTO;
 import com.organizer.media.entity.User;
 import com.organizer.media.service.NotificationService;
 import com.organizer.media.utils.Constants;
@@ -31,16 +31,25 @@ public class EmailServiceImpl implements NotificationService {
         mailSender.send(message);
     }
 
-    public void sendConfirmationNotification(RegisterRequest request, String confirmationCode) {
+    public void sendConfirmationNotification(RegisterRequestDTO request, String confirmationCode) {
         String fullName = request.getFirstName() + " " + request.getLastName();
 
         String emailContent = """
                 Welcome %s!
                 Here is your confirmation code: %s
-                I will expire after 24 hours.
+                It will expire after 24 hours.
                 """.formatted(fullName, confirmationCode);
 
         sendNotification(request.getEmail(), Constants.VALIDATION_EMAIL_TITLE, emailContent);
+    }
+
+    public void resendConfirmationNotification(String emailTo, String confirmationCode) {
+        String emailContent = """
+                This is your new confirmation code: %s
+                It will expire after 24 hours.
+                """.formatted(confirmationCode);
+
+        sendNotification(emailTo, Constants.VALIDATION_EMAIL_TITLE, emailContent);
     }
 
     public void sendWelcomeNotification(User user) {
@@ -49,7 +58,7 @@ public class EmailServiceImpl implements NotificationService {
         String emailContent = """
                 Yey!
                 You are the best %s!
-                Your account is active now!
+                Your account is active!
                 """.formatted(fullName);
 
         sendNotification(user.getEmail(), Constants.WELCOME_EMAIL, emailContent);
