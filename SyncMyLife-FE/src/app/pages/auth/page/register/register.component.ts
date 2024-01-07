@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { RegisterRequestDTO } from "../../../../data/interfaces/RegisterRequestDTO";
@@ -6,7 +6,7 @@ import { RegisterService } from "../../../../core/service/register.service";
 import { LoadingService } from "../../../../shared/service/loading.service";
 import { Constants } from "../../../../shared/constants";
 import { NotificationService } from "../../../../shared/service/notification.service";
-import {AuthService} from "../../../../core/service/auth.service";
+import { AuthService } from "../../../../core/service/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -27,21 +27,10 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
-      firstName: [
-        '',
-        Validators.required
-      ],
-      lastName: [
-        '',
-        Validators.required
-      ],
-      email: [
-        '',
-        [Validators.required, Validators.email]
-      ],
-      password: [
-        '',
-        [
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [
           Validators.required,
           Validators.minLength(6),
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
@@ -63,20 +52,20 @@ export class RegisterComponent implements OnInit{
       const registrationData: RegisterRequestDTO = this.registrationForm.value;
       this.loadingService.show();
 
-      this.registerService.register(registrationData).subscribe({
-        next: (tokenResponse) => {
-          if (tokenResponse.token) {
-            this.authService.setSession(tokenResponse);
-            this.router.navigate(['auth/confirm-registration']);
+        this.registerService.register(registrationData).subscribe({
+          next: (tokenResponse) => {
+            if (tokenResponse.token) {
+              this.authService.setSession(tokenResponse);
+              this.router.navigate(['auth/confirm-registration']);
+              this.loadingService.hide();
+              this.notificationService.displayNotification(Constants.REGISTERED_MSG, Constants.SUCCESS_STYLE);
+            }
+          },
+          error: (error) => {
+            this.notificationService.displayNotification(error, Constants.ERROR_STYLE);
             this.loadingService.hide();
-            this.notificationService.displayNotification(Constants.REGISTERED_MSG, Constants.SUCCESS_STYLE);
-          }
-        },
-        error: (error) => {
-          this.notificationService.displayNotification(error, Constants.ERROR_STYLE);
-          this.loadingService.hide();
-        },
-      });
+          },
+        });
 
     }
   }
@@ -91,7 +80,5 @@ export class RegisterComponent implements OnInit{
       form.get('confirmPassword')?.setErrors(null);
     }
   }
-
-
 
 }

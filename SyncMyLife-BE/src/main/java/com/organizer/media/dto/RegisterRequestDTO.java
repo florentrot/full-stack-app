@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConfirmationEmailRequest {
+public class RegisterRequestDTO {
 
-    private String validationCode;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
 }

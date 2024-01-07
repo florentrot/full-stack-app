@@ -1,9 +1,9 @@
 package com.organizer.media.auth;
 
-import com.organizer.media.dto.AuthenticationRequest;
-import com.organizer.media.dto.AuthenticationResponse;
-import com.organizer.media.dto.ConfirmationEmailRequest;
-import com.organizer.media.dto.RegisterRequest;
+import com.organizer.media.dto.AuthenticationRequestDTO;
+import com.organizer.media.dto.AuthenticationResponseDTO;
+import com.organizer.media.dto.ConfirmationEmailRequestDTO;
+import com.organizer.media.dto.RegisterRequestDTO;
 import com.organizer.media.dao.UserDao;
 import com.organizer.media.entity.Role;
 import com.organizer.media.entity.User;
@@ -31,7 +31,7 @@ public class AuthenticationService {
     @Value("${validation.expire.in.minutes}")
     private String validationDuration;
 
-    private final UserDao repository;
+    private final UserDao userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -39,7 +39,7 @@ public class AuthenticationService {
     private final NotificationService notificationService;
 
 
-    public AuthenticationResponse register(RegisterRequest request) throws EmailAlreadyUsedException {
+    public AuthenticationResponseDTO register(RegisterRequestDTO request) throws EmailAlreadyUsedException {
         String verificationCode = generateCode();
         var user = User.builder()
                 .firstName(request.getFirstName())
@@ -54,16 +54,16 @@ public class AuthenticationService {
 
 
         checkEmailAvailable(request);
-        repository.save(user);
+        userRepository.save(user);
         notificationService.sendConfirmationNotification(request, verificationCode);
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -72,37 +72,37 @@ public class AuthenticationService {
             );
         } catch (AccountStatusException e) {
             if (e instanceof DisabledException) {
-                Optional<User> inactiveUser = this.repository.findByEmail(request.getEmail());
+                Optional<User> inactiveUser = this.userRepository.findByEmail(request.getEmail());
                 if (inactiveUser.isPresent()) {
                     var jwtToken = jwtService.generateToken(inactiveUser.get());
-                    return AuthenticationResponse.builder()
+                    return AuthenticationResponseDTO.builder()
                             .token(jwtToken)
                             .build();
                 }
             }
         }
 
-        var user = repository.findByEmail(request.getEmail())
+        var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
 
     private String generateCode() {
-        return Utils.generateUUID().replace("-", "");
+        return Utils.generateConfirmationCode();
     }
 
-    private void checkEmailAvailable(RegisterRequest request) {
-        if (repository.findByEmail(request.getEmail()).isPresent()) {
+    private void checkEmailAvailable(RegisterRequestDTO request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException(Constants.UNAVAILABLE_EMAIL);
         }
     }
 
-    public AuthenticationResponse confirmAccount(ConfirmationEmailRequest request) {
+    public AuthenticationResponseDTO confirmAccount(ConfirmationEmailRequestDTO request) {
         String validationCode = request.getValidationCode();
-        Optional<User> user = this.repository.getUserByVerificationCode(validationCode);
+        Optional<User> user = this.userRepository.getUserByVerificationCode(validationCode);
         if (user.isEmpty()) {
             throw new InvalidValidationCodeException(Constants.INVALID_VALIDATION_CODE);
         }
@@ -117,13 +117,26 @@ public class AuthenticationService {
         User confirmedUser = user.get();
         confirmedUser.setActive(true);
         confirmedUser.setVerificationCode(null);
-        repository.save(confirmedUser);
+        userRepository.save(confirmedUser);
         notificationService.sendWelcomeNotification(confirmedUser);
         var jwtToken = jwtService.generateToken(confirmedUser);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
 
 
+    public String resendValidationCode(String bearer) {
+        String verificationCode = generateCode();
+        String jwt = jwtService.getJWT(bearer);
+        String emailTo = jwtService.extractUsername(jwt);
+        Optional<User> user = userRepository.findByEmail(emailTo);
+        if (user.isEmpty()) {
+            throw new InvalidValidationCodeException("Email doesn't exists");
+        }
+        user.get().setVerificationCode(verificationCode);
+        userRepository.save(user.get());
+        notificationService.resendConfirmationNotification(user.get().getEmail(), verificationCode);
+        return null;
+    }
 }

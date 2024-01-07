@@ -23,4 +23,8 @@ export class RegisterService {
     return this.http.post<AuthDto>(`${this.registerUrl}/confirmAccount`, {validationCode: validationCode});
   }
 
+  resendValidationCode() {
+    return this.http.post<String>(`${this.registerUrl}/resendValidationCode`, {})
+  }
+
 }
