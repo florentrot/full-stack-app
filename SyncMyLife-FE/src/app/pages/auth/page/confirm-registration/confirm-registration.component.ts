@@ -60,7 +60,17 @@ export class ConfirmRegistrationComponent {
   }
 
   resendCode() {
-    // todo:
-    this.notificationService.displayNotification(Constants.CONFIRM_RESEND_VERIFICATION_CODE, Constants.SUCCESS_STYLE);
+    this.loadingService.show();
+    this.registerService.resendValidationCode().subscribe({
+      next: () => {
+          this.loadingService.hide();
+          this.notificationService.displayNotification(Constants.CONFIRM_RESEND_VERIFICATION_CODE, Constants.SUCCESS_STYLE);
+      },
+      error: (error) => {
+        this.notificationService.displayNotification(error, Constants.ERROR_STYLE);
+        this.loadingService.hide();
+      },
+    });
+
   }
 }

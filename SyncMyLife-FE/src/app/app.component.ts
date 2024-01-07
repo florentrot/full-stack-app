@@ -17,16 +17,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.initialConfiguration();
-  }
-
-  initialConfiguration(): void{
     this.fetchLoggedInUserData();
   }
 
   fetchLoggedInUserData(): void{
     const localUserData = this.authService.gelLocalUserData();
-    if(localUserData && this.authService.isAuthenticated()){
+    if (localUserData && this.authService.isAuthenticated()){
       this.dataService.getUserByEmail(localUserData?.sub).subscribe(user => {
         this.shareService.setUser(user);
       });

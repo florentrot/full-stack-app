@@ -6,7 +6,7 @@ import { ContactComponent } from "./page/contact/contact.component";
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'about',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

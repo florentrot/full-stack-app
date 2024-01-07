@@ -74,4 +74,8 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    public String getJWT(String bearer) {
+        return bearer.replace("Bearer ", "");
+    }
+
 }
