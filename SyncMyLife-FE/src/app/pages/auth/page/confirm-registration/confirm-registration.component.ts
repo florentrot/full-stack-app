@@ -6,6 +6,8 @@ import {NotificationService} from "../../../../shared/service/notification.servi
 import {Constants} from "../../../../shared/constants";
 import {RegisterService} from "../../../../core/service/register.service";
 import {AuthService} from "../../../../core/service/auth.service";
+import {finalize} from "rxjs";
+import {UserService} from "../../../../shared/service/user.service";
 
 @Component({
   selector: 'app-confirm-registration',
@@ -22,7 +24,8 @@ export class ConfirmRegistrationComponent {
     private registerService: RegisterService,
     private authService: AuthService,
     private loadingService: LoadingService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private userService: UserService
   ) {
     this.confirmForm = this.formBuilder.group({
       verificationCode: ['', [Validators.required]]
@@ -34,16 +37,20 @@ export class ConfirmRegistrationComponent {
       this.loadingService.show();
       const verificationCode = this.confirmForm.get('verificationCode').value;
 
-        this.registerService.confirmEmail(verificationCode).subscribe({
+        this.registerService.confirmEmail(verificationCode)
+          .pipe(finalize(() => {
+            this.userService.fetchLoggedInUserData();
+          }))
+          .subscribe({
           next: (tokenResponse) => {
             if (!tokenResponse.token) {
               this.router.navigate(['auth/confirm-registration']);
               this.loadingService.hide();
-            } else {
-                this.authService.setSession(tokenResponse);
-                this.router.navigate(['dashboard']);
-                this.loadingService.hide();
-                this.notificationService.displayNotification(Constants.CONFIRM_REGISTRATION_MSG, Constants.SUCCESS_STYLE);
+            }else {
+              this.authService.setSession(tokenResponse);
+              this.router.navigate(['dashboard']);
+              this.loadingService.hide();
+              this.notificationService.displayNotification(Constants.CONFIRM_REGISTRATION_MSG, Constants.SUCCESS_STYLE);
             }
           },
           error: (error) => {

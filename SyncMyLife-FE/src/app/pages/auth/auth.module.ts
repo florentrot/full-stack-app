@@ -7,12 +7,14 @@ import { RegisterComponent } from './page/register/register.component';
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { SharedModule } from "../../shared/shared.module";
 import { ConfirmRegistrationComponent } from './page/confirm-registration/confirm-registration.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    ProfileComponent
   ],
     imports: [
         CommonModule,

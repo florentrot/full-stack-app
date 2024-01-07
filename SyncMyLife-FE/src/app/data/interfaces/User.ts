@@ -8,6 +8,9 @@ export interface User {
   registrationDate: string;
   isActive: boolean;
   role: Role;
+  profilePicture: Blob;
+  dateOfBirth: string;
+  gender: string;
 }
 
 export enum Role {

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ShareService} from "../../../../shared/service/share.service";
+import {UserService} from "../../../../shared/service/user.service";
 import {User} from "../../../../data/interfaces/User";
 
 @Component({
@@ -11,10 +11,10 @@ export class DashboardComponent implements OnInit{
   username: any = 'username';
   _user: User | null = null;
 
-  constructor(private shareService: ShareService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.shareService.user$.subscribe(user => {
+    this.userService.user$.subscribe(user => {
       this._user = user;
     });
   }

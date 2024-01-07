@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ShareService} from "./shared/service/share.service";
-import {AuthService} from "./core/service/auth.service";
-import {DataService} from "./data/data.service";
+import {UserService} from "./shared/service/user.service";
 
 @Component({
   selector: 'app-root',
@@ -11,28 +9,14 @@ import {DataService} from "./data/data.service";
 export class AppComponent implements OnInit{
   title = 'media-FE';
 
-  constructor(private shareService: ShareService,
-              private authService: AuthService,
-              private dataService: DataService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.initialConfiguration();
   }
 
-  initialConfiguration(): void{
-    this.fetchLoggedInUserData();
-  }
-
-  fetchLoggedInUserData(): void{
-    const localUserData = this.authService.gelLocalUserData();
-    if(localUserData && this.authService.isAuthenticated()){
-      this.dataService.getUserByEmail(localUserData?.sub).subscribe(user => {
-        this.shareService.setUser(user);
-      });
-    }
-    else {
-      console.log('User is not logged in.');
-    }
+  initialConfiguration(): void {
+    this.userService.fetchLoggedInUserData();
   }
 }

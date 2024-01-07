@@ -8,6 +8,8 @@ import {LoadingService} from "../../../../shared/service/loading.service";
 import {Constants} from "../../../../shared/constants";
 import {NotificationService} from "../../../../shared/service/notification.service";
 import {RegisterService} from "../../../../core/service/register.service";
+import {finalize} from "rxjs";
+import {UserService} from "../../../../shared/service/user.service";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private registerService: RegisterService,
     private loadingService: LoadingService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private userService: UserService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -45,9 +48,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const registrationData: RegisterRequestDTO = this.loginForm.value;
       this.loadingService.show();
-
-
-        this.authService.login(registrationData).subscribe({
+      this.authService.login(registrationData)
+        .pipe(finalize(() => {
+          this.userService.fetchLoggedInUserData();
+        }))
+        .subscribe({
           next: (tokenResponse) => {
             if (tokenResponse.token) {
                 this.authService.setSession(tokenResponse);
@@ -55,13 +60,13 @@ export class LoginComponent implements OnInit {
                 this.loadingService.hide();
                 this.notificationService.displayNotification(Constants.AUTHENTICATED_MSG, Constants.SUCCESS_STYLE);
             }
-          },
-          error: (error) => {
-            this.notificationService.displayNotification(Constants.INVALID_CREDENTIALS_MSG, Constants.ERROR_STYLE);
-            console.error('Authentication failed:', error);
-            this.loadingService.hide();
-          },
-        });
+        },
+        error: (error) => {
+          this.notificationService.displayNotification(Constants.INVALID_CREDENTIALS_MSG, Constants.ERROR_STYLE);
+          console.error('Authentication failed:', error);
+          this.loadingService.hide();
+        },
+      });
 
     }
   }

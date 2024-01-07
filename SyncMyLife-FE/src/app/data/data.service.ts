@@ -11,7 +11,7 @@ export class DataService{
 
   constructor(private http: HttpClient) {}
 
-  public getUserByEmail(email: string | undefined): Observable<User>{
+  public getUserByEmail(email: string): Observable<User>{
     return this.http.get<User>(`${Endpoints.user}/${email}`);
   }
 }
