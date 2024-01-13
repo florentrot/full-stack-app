@@ -31,6 +31,7 @@ public class User implements UserDetails {
     private String password;
     private String verificationCode;
     private LocalDateTime registrationDate;
+    private LocalDateTime codeRequestTimestamp;
     private boolean isActive;
 
     @Enumerated(EnumType.STRING)
