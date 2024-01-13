@@ -1,14 +1,11 @@
 package com.organizer.media.auth;
 
-import com.organizer.media.dto.AuthenticationRequestDTO;
-import com.organizer.media.dto.AuthenticationResponseDTO;
-import com.organizer.media.dto.ConfirmationEmailRequestDTO;
-import com.organizer.media.dto.RegisterRequestDTO;
+import com.organizer.media.dto.*;
 import com.organizer.media.dao.UserDao;
 import com.organizer.media.entity.Role;
 import com.organizer.media.entity.User;
 import com.organizer.media.exception.EmailAlreadyUsedException;
-import com.organizer.media.exception.InvalidValidationCodeException;
+import com.organizer.media.exception.ValidationCodeException;
 import com.organizer.media.service.NotificationService;
 import com.organizer.media.utils.Constants;
 import com.organizer.media.utils.Utils;
@@ -104,14 +101,14 @@ public class AuthenticationService {
         String validationCode = request.getValidationCode();
         Optional<User> user = this.userRepository.getUserByVerificationCode(validationCode);
         if (user.isEmpty()) {
-            throw new InvalidValidationCodeException(Constants.INVALID_VALIDATION_CODE);
+            throw new ValidationCodeException(Constants.INVALID_VALIDATION_CODE);
         }
         LocalDateTime registrationDateTime = user.get().getRegistrationDate();
         LocalDateTime now = LocalDateTime.now();
         Duration duration = Duration.between(registrationDateTime, now);
         long minutes = duration.toMinutes();
         if (minutes >= Integer.parseInt(validationDuration)) {
-            throw new InvalidValidationCodeException(Constants.EXPIRED_VALIDATION_CODE);
+            throw new ValidationCodeException(Constants.EXPIRED_VALIDATION_CODE);
         }
 
         User confirmedUser = user.get();
@@ -127,16 +124,45 @@ public class AuthenticationService {
 
 
     public String resendValidationCode(String bearer) {
-        String verificationCode = generateCode();
-        String jwt = jwtService.getJWT(bearer);
-        String emailTo = jwtService.extractUsername(jwt);
-        Optional<User> user = userRepository.findByEmail(emailTo);
-        if (user.isEmpty()) {
-            throw new InvalidValidationCodeException("Email doesn't exists");
-        }
-        user.get().setVerificationCode(verificationCode);
-        userRepository.save(user.get());
-        notificationService.resendConfirmationNotification(user.get().getEmail(), verificationCode);
+        String emailTo = getEmailFromBearerToken(bearer);
+        User user = getUserByEmail(emailTo);
+        handleResendValidationCodeIfNeeded(user);
         return null;
+    }
+
+    private String getEmailFromBearerToken(String bearer) {
+        String jwt = jwtService.getJWT(bearer);
+        return jwtService.extractUsername(jwt);
+    }
+
+    private User getUserByEmail(String emailTo) {
+        return userRepository.findByEmail(emailTo)
+                .orElseThrow(() -> new ValidationCodeException(Constants.EMAIL_ALREADY_EXISTS));
+    }
+
+    private void handleResendValidationCodeIfNeeded(User user) {
+        LocalDateTime lastCodeRequestTimestamp = user.getCodeRequestTimestamp();
+
+        if (lastCodeRequestTimestamp == null || hasElapsedMoreThan10Minutes(lastCodeRequestTimestamp)) {
+            handleResendValidationCode(user);
+        } else {
+            throw new ValidationCodeException(Constants.WAIT_FOR_ANOTHER_CODE_REQUEST);
+        }
+    }
+
+
+    private boolean hasElapsedMoreThan10Minutes(LocalDateTime requestCodeTimestamp) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Duration duration = Duration.between(requestCodeTimestamp, currentDateTime);
+        return duration.toMinutes() > 10;
+    }
+
+    private void handleResendValidationCode(User user) {
+        String verificationCode = generateCode();
+        user.setVerificationCode(verificationCode);
+        LocalDateTime codeRequestTimestamp = LocalDateTime.now();
+        user.setCodeRequestTimestamp(codeRequestTimestamp);
+        userRepository.save(user);
+        notificationService.resendConfirmationNotification(user.getEmail(), verificationCode);
     }
 }
