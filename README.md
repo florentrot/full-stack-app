@@ -8,6 +8,7 @@ Validation component
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/7e6682c8-db8b-4521-8917-9a38da6924bd)
 
 Confirmation email
+
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/7d84f76b-b33b-43fc-81c8-d9b535956e8c)
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/a1ef24da-07f8-4b3f-b4fe-d24d65a64b14)
 
