@@ -27,5 +27,10 @@ Mobile mode
 
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/8e130525-091c-46ef-9aea-23ae1d3779f5)
 
+Footer
+
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/82c1ce65-b4a4-4f04-beed-81e1544f2639)
+
+
 
 
