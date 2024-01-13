@@ -23,25 +23,24 @@ export class HeaderInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (!request.url.includes('/api/v1/auth/') || request.url.includes('/api/v1/auth/resendValidationCode')) {
+    if (this.shouldAddToken(request)) {
       request = this.addToken(request);
     }
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        let errorMsg = '';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerSideExceptions(error);
-        }
-        if (error.status === HttpStatusCode.Unauthorized) {
-          this.router.navigate(['/auth/login']);
-        }
+        const errorMsg = this.handleError(error);
+        this.handleUnauthorizedError(error);
         return throwError(() => errorMsg);
       })
     );
   }
 
+  private shouldAddToken(request: HttpRequest<unknown>): boolean {
+    const authApiUrl = '/api/v1/auth/';
+    const excludeTokenUrl = '/api/v1/auth/resendValidationCode';
+
+    return !request.url.includes(authApiUrl) || request.url.includes(excludeTokenUrl);
+  }
 
   private addToken(request: HttpRequest<any>) {
     return request.clone({
@@ -51,15 +50,28 @@ export class HeaderInterceptor implements HttpInterceptor {
     });
   }
 
-  private getServerSideExceptions(error: HttpErrorResponse): string {
-    if (error?.error==='This email is already in use') {
-      return error.error;
-    } else if(error?.error==='Your validation code expired') {
-      return error.error;
-    } else if(error?.error==='Your code is invalid') {
-      return error.error;
-    }else {
-      return `Error Code: ${error.status}, Message: ${error.message}`;
+  private handleUnauthorizedError(error: HttpErrorResponse): void {
+    if (error.status === HttpStatusCode.Unauthorized) {
+      this.router.navigate(['/auth/login']);
     }
+  }
+
+  private handleError(error: HttpErrorResponse): string {
+    if (error.error instanceof ErrorEvent) {
+      return `Error: ${error.error.message}`;
+    } else {
+      return this.getServerSideExceptions(error);
+    }
+  }
+
+  private getServerSideExceptions(error: HttpErrorResponse): string {
+    const specificErrors = [
+      'This email is already in use',
+      'Your validation code expired',
+      'Your code is invalid',
+      'Wait 10 minutes to be able to request a new confirmation code',
+    ];
+
+    return specificErrors.includes(error?.error) ? error.error : `Error Code: ${error.status}, Message: ${error.message}`;
   }
 }

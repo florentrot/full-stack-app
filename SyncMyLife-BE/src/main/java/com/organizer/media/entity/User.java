@@ -41,6 +41,8 @@ public class User implements UserDetails {
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
 
+    private LocalDateTime codeRequestTimestamp;
+
     @Column(name = "is_active")
     private boolean isActive;
 
