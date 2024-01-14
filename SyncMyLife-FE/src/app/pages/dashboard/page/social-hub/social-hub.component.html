@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title display-5">My Social Hub</h1>
+      <p class="card-text lead">Never forget your family and friends</p>
+      <hr>
+
+      <div class="cards-container">
+        <app-person-card *ngFor="let personCard of personCards" [personCard]="personCard"></app-person-card>
+      </div>
+
+  </div>
+</div>
