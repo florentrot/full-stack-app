@@ -1,0 +1,33 @@
+.person-card {
+  margin: 0 5px;
+  max-width: 260px;
+
+  .card {
+    height: 600px;
+    color: white;
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    img {
+      z-index: 0;
+      height: 280px;
+    }
+
+    .card-body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      z-index: 1;
+    }
+
+    .card-img-top {
+      transition: transform 0.2s ease-in-out;
+      z-index: 0;
+      max-height: 400px;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+  }
+}

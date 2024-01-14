@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Endpoints} from "../../data/endpoints";
-import {AuthDto} from "../../data/interfaces/AuthDto";
+import {AuthDTO} from "../../data/interfaces/AuthDTO";
 import {Observable} from "rxjs/internal/Observable";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthenticationRequestDTO} from "../../data/interfaces/AuthenticationRequestDTO";
@@ -21,7 +21,7 @@ export class AuthService {
   ) { }
 
   login(authRequest: AuthenticationRequestDTO): Observable<any> {
-    return this.http.post<AuthDto>(`${this.authUrl}/authenticate`, authRequest);
+    return this.http.post<AuthDTO>(`${this.authUrl}/authenticate`, authRequest);
   }
 
   isAuthenticated(): boolean {
@@ -46,7 +46,7 @@ export class AuthService {
     return false;
   }
 
-  setSession(authDto: AuthDto): void {
+  setSession(authDto: AuthDTO): void {
     localStorage.setItem('token', 'Bearer ' + authDto.token);
   }
 
