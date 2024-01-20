@@ -31,6 +31,10 @@ Footer
 
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/82c1ce65-b4a4-4f04-beed-81e1544f2639)
 
+Confirm Dialog
+
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/1de5e1d8-01b7-4c6a-97e9-4900bec8a40a)
+
 
 
 
