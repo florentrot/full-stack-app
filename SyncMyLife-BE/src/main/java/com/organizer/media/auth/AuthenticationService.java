@@ -32,9 +32,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
     private final NotificationService notificationService;
-
 
     public AuthenticationResponseDTO register(RegisterRequestDTO request) throws EmailAlreadyUsedException {
         String verificationCode = generateCode();
@@ -49,15 +47,10 @@ public class AuthenticationService {
                 .registrationDate(LocalDateTime.now())
                 .build();
 
-
         checkEmailAvailable(request);
         userRepository.save(user);
         notificationService.sendConfirmationNotification(request, verificationCode);
-
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponseDTO.builder()
-                .token(jwtToken)
-                .build();
+        return getToken(user);
     }
 
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request) {
@@ -71,24 +64,15 @@ public class AuthenticationService {
             if (e instanceof DisabledException) {
                 Optional<User> inactiveUser = this.userRepository.findByEmail(request.getEmail());
                 if (inactiveUser.isPresent()) {
-                    var jwtToken = jwtService.generateToken(inactiveUser.get());
-                    return AuthenticationResponseDTO.builder()
-                            .token(jwtToken)
-                            .build();
+                    User user = inactiveUser.get();
+                    getToken(user);
                 }
             }
         }
 
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponseDTO.builder()
-                .token(jwtToken)
-                .build();
-    }
-
-    private String generateCode() {
-        return Utils.generateConfirmationCode();
+        return getToken(user);
     }
 
     private void checkEmailAvailable(RegisterRequestDTO request) {
@@ -116,21 +100,24 @@ public class AuthenticationService {
         confirmedUser.setVerificationCode(null);
         userRepository.save(confirmedUser);
         notificationService.sendWelcomeNotification(confirmedUser);
-        var jwtToken = jwtService.generateToken(confirmedUser);
+        return getToken(confirmedUser);
+    }
+
+    private AuthenticationResponseDTO getToken(User user) {
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
     }
 
-
     public String resendValidationCode(String bearer) {
-        String emailTo = getEmailFromBearerToken(bearer);
+        String emailTo = getEmailFromToken(bearer);
         User user = getUserByEmail(emailTo);
-        handleResendValidationCodeIfNeeded(user);
+        handleResendValidationCode(user);
         return null;
     }
 
-    private String getEmailFromBearerToken(String bearer) {
+    private String getEmailFromToken(String bearer) {
         String jwt = jwtService.getJWT(bearer);
         return jwtService.extractUsername(jwt);
     }
@@ -140,13 +127,13 @@ public class AuthenticationService {
                 .orElseThrow(() -> new ValidationCodeException(Constants.EMAIL_ALREADY_EXISTS));
     }
 
-    private void handleResendValidationCodeIfNeeded(User user) {
+    private void handleResendValidationCode(User user) {
         LocalDateTime lastCodeRequestTimestamp = user.getCodeRequestTimestamp();
 
         if (lastCodeRequestTimestamp == null || hasElapsedMoreThan10Minutes(lastCodeRequestTimestamp)) {
-            handleResendValidationCode(user);
+            sendValidationCode(user);
         } else {
-            throw new ValidationCodeException(Constants.WAIT_FOR_ANOTHER_CODE_REQUEST);
+            throw new ValidationCodeException(Constants.WAIT_10_MINUTES);
         }
     }
 
@@ -157,12 +144,16 @@ public class AuthenticationService {
         return duration.toMinutes() > 10;
     }
 
-    private void handleResendValidationCode(User user) {
+    private void sendValidationCode(User user) {
         String verificationCode = generateCode();
         user.setVerificationCode(verificationCode);
         LocalDateTime codeRequestTimestamp = LocalDateTime.now();
         user.setCodeRequestTimestamp(codeRequestTimestamp);
         userRepository.save(user);
         notificationService.resendConfirmationNotification(user.getEmail(), verificationCode);
+    }
+
+    private String generateCode() {
+        return Utils.generateConfirmationCode();
     }
 }

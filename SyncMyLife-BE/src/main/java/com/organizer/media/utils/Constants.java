@@ -8,7 +8,7 @@ public class Constants {
     //VALIDATION CODE
     public static final String INVALID_VALIDATION_CODE = "Your code is invalid";
     public static final String EXPIRED_VALIDATION_CODE = "Your validation code expired";
-    public static final String WAIT_FOR_ANOTHER_CODE_REQUEST = "Wait 10 minutes to be able to request a new confirmation code";
+    public static final String WAIT_10_MINUTES = "Wait 10 minutes to be able to request a new confirmation code";
 
     //OTHER
     public static final String VALIDATION_EMAIL_TITLE = "Confirmation Code (SyncMyLife)";
