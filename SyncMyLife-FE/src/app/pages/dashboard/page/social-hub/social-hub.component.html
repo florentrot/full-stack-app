@@ -3,11 +3,16 @@
     <div class="card-body">
       <h1 class="card-title display-5">My Social Hub</h1>
       <p class="card-text lead">Never forget your family and friends</p>
-      <hr>
 
+      <div class="social-hub-nav-bar">
+        <button class="btn btn-success">Add person</button>
+        <button class="btn btn-success">Search person</button>
+      </div>
+      <hr>
       <div class="cards-container">
         <app-person-card *ngFor="let personCard of personCards" [personCard]="personCard"></app-person-card>
       </div>
 
+    </div>
   </div>
 </div>

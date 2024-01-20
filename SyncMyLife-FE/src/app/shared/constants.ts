@@ -8,4 +8,7 @@ export const Constants = {
   FETCHING_PERSONS_ERROR_MSG: "Error fetching person cards",
   EMAIL_NOT_CONFIRMED: "Email not confirmed",
   CONFIRM_RESEND_VERIFICATION_CODE: "The verification code has been resubmitted successfully!",
+  SUCCESSFULLY_LOGGED_OUT: "You have successfully logged out!",
+  CONFIRM_DIALOG: "Confirmation Dialog",
+  CONFIRM_LOGOUT: "Are you sure you want to logout?",
 }

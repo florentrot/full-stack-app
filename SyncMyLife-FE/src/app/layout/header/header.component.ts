@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../core/service/auth.service";
+import { ConfirmDialogService } from "../../shared/service/confirm-dialog.service";
+import { NotificationService } from "../../shared/service/notification.service";
+import { Constants } from "../../shared/constants";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +13,7 @@ import { AuthService } from "../../core/service/auth.service";
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private confirmDialogService: ConfirmDialogService, private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -40,5 +43,18 @@ export class HeaderComponent implements OnInit {
     } else {
       this.router.navigate(['/auth/register']);
     }
+  }
+
+  openConfirmDialog(): void {
+    this.confirmDialogService
+      .openConfirmDialog(Constants.CONFIRM_DIALOG, Constants.CONFIRM_LOGOUT)
+      .subscribe((result) => {
+        if (result) {
+          this.logout();
+          this.notificationService.displayNotification(Constants.SUCCESSFULLY_LOGGED_OUT, Constants.SUCCESS_STYLE)
+        } else {
+          console.log('Rejected');
+        }
+      });
   }
 }

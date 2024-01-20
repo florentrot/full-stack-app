@@ -14,8 +14,9 @@ import { CommonModule } from "@angular/common";
 import { DataModule } from "./data/data.module";
 import { HeaderAuthComponent } from "./layout/header-auth/header-auth.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {ShareService} from "./shared/service/share.service";
-import {DataService} from "./data/data.service";
+import { ShareService } from "./shared/service/share.service";
+import { DataService } from "./data/data.service";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {DataService} from "./data/data.service";
     DataModule,
     SharedModule,
     PublicModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [ShareService, DataService],
   bootstrap: [AppComponent]
