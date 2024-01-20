@@ -1,7 +1,9 @@
 https://trello.com/b/WORShsjB/syncmylife
 
 This is how we work.
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/3ebe796e-17b9-41b9-9efa-78355f57f2f1)
+
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/1e961740-7788-4ac9-b047-5c65b9a9aaba)
+
 
 
 Validation component
