@@ -4,19 +4,20 @@
 }
 
 .container {
-  min-height: 93.8vh;
+  min-height: 63.8vh;
   display: flex;
   flex-direction: column;
 }
 
 .header-wrapper {
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
 }
 
 .content-wrapper {
   position: relative;
-  margin-top: 70px;
+  margin-top: 10px;
 }
 
 .footer-wrapper {

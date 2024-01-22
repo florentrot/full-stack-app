@@ -9,6 +9,28 @@
   text-decoration: none;
 }
 
+//app generic buttons
+
+.bottom-btn {
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.bottom-btn:hover {
+  background-color: #0056b3;
+}
+
+.bottom-btn input {
+  display: none;
+}
+
+
+
 //override bootstrap
 .btn-outline-success {
   color: white !important;
@@ -21,17 +43,17 @@
 }
 
 .btn-success {
-  color: black !important;
-  background-color: white !important;
+  min-width: 150px !important;
+  color: white !important;
+  background-color: forestgreen !important;
   border: #333 1.5px solid !important;
-  border-radius: 0 !important;
+  border-radius: 4px !important;
 
 
   &:hover {
     color: whitesmoke !important;
-    background-color: forestgreen !important;
+    background-color: darkgreen !important;
     border: #333 1.5px solid !important;
-    border-radius: 0 !important;
   }
 
   &:disabled {
@@ -40,18 +62,17 @@
 }
 
 .btn-danger {
-  color: black !important;
-  background-color: white !important;
+  min-width: 150px !important;
+  color: white !important;
+  background-color: #dc3545 !important;
   border: #333 1.5px solid !important;
-  margin-bottom: 10px;
-  border-radius: 0 !important;
+  border-radius: 4px !important;
 
 
   &:hover {
     color: whitesmoke !important;
-    background-color: #dc3545 !important;
+    background-color: darkred !important;
     border: #333 1.5px solid !important;
-    border-radius: 0 !important;
   }
 
   &:disabled {

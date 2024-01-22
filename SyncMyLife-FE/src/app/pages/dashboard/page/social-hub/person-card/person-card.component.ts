@@ -10,4 +10,7 @@ export class PersonCardComponent {
 
   @Input() personCard!: PersonCardDTO;
 
+  editMode() {
+    // todo:
+  }
 }
