@@ -10,8 +10,8 @@ Validation component
 
 Confirmation email
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/7d84f76b-b33b-43fc-81c8-d9b535956e8c)
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/a1ef24da-07f8-4b3f-b4fe-d24d65a64b14)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/252ae605-8fd8-4469-8102-0f9ee790c54c)
+
 
 Dashboard (for auth only)
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
