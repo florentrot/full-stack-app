@@ -10,14 +10,15 @@ Validation component
 
 Confirmation email
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/7d84f76b-b33b-43fc-81c8-d9b535956e8c)
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/a1ef24da-07f8-4b3f-b4fe-d24d65a64b14)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/252ae605-8fd8-4469-8102-0f9ee790c54c)
+
 
 Dashboard (for auth only)
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/83fc6b41-d012-4957-aa28-636f6b849189)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
 
 Just a nice component
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/2e504102-c8c4-41cd-87ef-09123fd04af0)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/898aef32-dc04-46af-92ed-5b60c1e6751c)
+
 
 
 Register component similar with Login component
@@ -26,11 +27,13 @@ Register component similar with Login component
 
 Mobile mode
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/8e130525-091c-46ef-9aea-23ae1d3779f5)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/be22b64e-af71-41ef-b20d-ab7497ce1bd9)
+
 
 Footer
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/82c1ce65-b4a4-4f04-beed-81e1544f2639)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/898a5319-3bea-4acb-85a7-3380d0b4d7a8)
+
 
 Confirm Dialog
 
