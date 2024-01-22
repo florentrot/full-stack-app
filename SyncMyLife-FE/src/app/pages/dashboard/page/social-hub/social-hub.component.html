@@ -5,8 +5,10 @@
       <p class="card-text lead">Never forget your family and friends</p>
 
       <div class="social-hub-nav-bar">
-        <button class="btn btn-success">Add person</button>
-        <button class="btn btn-success">Search person</button>
+        <button class="btn btn-success" (click)="addPerson()">Add person</button>
+        <form class="search-group" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search person" aria-label="Search">
+        </form>
       </div>
       <hr>
       <div class="cards-container">

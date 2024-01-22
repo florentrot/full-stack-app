@@ -39,4 +39,7 @@ export class SocialHubComponent implements OnInit {
     );
   }
 
+  addPerson() {
+    // todo:
+  }
 }
