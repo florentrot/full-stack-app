@@ -2,7 +2,8 @@ https://trello.com/b/WORShsjB/syncmylife
 
 
 Just a nice component
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/20ee25c2-2371-4198-82e7-1ed5a1342cc1)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/07826c86-6b33-47ce-a4f8-c3085d8e4176)
+
 
 
 Validation component
