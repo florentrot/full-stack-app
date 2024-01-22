@@ -13,6 +13,9 @@ import {NotificationService} from "../../../../shared/service/notification.servi
 export class SocialHubComponent implements OnInit {
 
   personCards: PersonCardDTO[] = [];
+  isAddModeOn: boolean = false;
+  btnMessage: any = "Add Person";
+  btnStyle: any = "btn-success";
 
   constructor(private dataService: DataService,
               private loadingService: LoadingService,
@@ -39,7 +42,9 @@ export class SocialHubComponent implements OnInit {
     );
   }
 
-  addPerson() {
-    // todo:
+  addPersonToggle() {
+    this.isAddModeOn = !this.isAddModeOn;
+    this.btnMessage = this.isAddModeOn ? "Close Form" : "Add Person";
+    this.btnStyle = this.isAddModeOn ? "btn-danger" : "btn-success";
   }
 }

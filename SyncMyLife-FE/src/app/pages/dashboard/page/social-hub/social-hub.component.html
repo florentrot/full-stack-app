@@ -5,12 +5,17 @@
       <p class="card-text lead">Never forget your family and friends</p>
 
       <div class="social-hub-nav-bar">
-        <button class="btn btn-success" (click)="addPerson()">Add person</button>
+        <button class="btn {{btnStyle}}" (click)="addPersonToggle()">{{btnMessage}}</button>
         <form class="search-group" role="search">
           <input class="form-control me-2" type="search" placeholder="Search person" aria-label="Search">
         </form>
       </div>
       <hr>
+
+      <app-add-person [isAddModeOn] = isAddModeOn></app-add-person>
+
+      <hr>
+      <p class="card-text lead">Your beautiful people</p>
       <div class="cards-container">
         <app-person-card *ngFor="let personCard of personCards" [personCard]="personCard"></app-person-card>
       </div>

@@ -1,7 +1,7 @@
 .person-card {
   display: flex;
   align-items: stretch;
-  max-width: 400px;
+  max-width: 200px;
   margin: 10px;
   cursor: pointer;
 }
@@ -17,31 +17,31 @@
 }
 
 .card:hover {
-  transform: scale(1.05);
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .card-img-top {
-  padding: 0 60px;
+  padding: 0 30px;
   object-fit: cover;
-  height: 350px;
+  height: 120px;
 }
 
 .card-body {
   flex: 1;
   text-align: center;
-  padding: 20px 60px;
+  padding: 5px 10px;
   display: flex;
   flex-direction: column;
 }
 
 .card-title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .card-text {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #555;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -50,16 +50,3 @@
   -webkit-box-orient: vertical;
 }
 
-.edit-btn {
-  margin-right: 5px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  cursor: pointer;
-  color: gray;
-  font-style: italic;
-}
-
-.edit-btn:hover {
-  text-decoration: underline;
-}
