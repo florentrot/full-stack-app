@@ -27,7 +27,8 @@ Register component similar with Login component
 
 Mobile mode
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/8e130525-091c-46ef-9aea-23ae1d3779f5)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/be22b64e-af71-41ef-b20d-ab7497ce1bd9)
+
 
 Footer
 
