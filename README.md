@@ -17,7 +17,8 @@ Dashboard (for auth only)
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
 
 Just a nice component
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/898aef32-dc04-46af-92ed-5b60c1e6751c)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/91d10e2e-5e11-489b-b016-6a90d72dfafb)
+
 
 
 
