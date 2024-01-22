@@ -14,7 +14,7 @@ Confirmation email
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/a1ef24da-07f8-4b3f-b4fe-d24d65a64b14)
 
 Dashboard (for auth only)
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/83fc6b41-d012-4957-aa28-636f6b849189)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
 
 Just a nice component
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/2e504102-c8c4-41cd-87ef-09123fd04af0)
