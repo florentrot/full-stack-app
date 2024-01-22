@@ -31,7 +31,8 @@ Mobile mode
 
 Footer
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/82c1ce65-b4a4-4f04-beed-81e1544f2639)
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/898a5319-3bea-4acb-85a7-3380d0b4d7a8)
+
 
 Confirm Dialog
 
