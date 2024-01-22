@@ -5,6 +5,7 @@ import { ConfirmDialogService } from "../../shared/service/confirm-dialog.servic
 import { NotificationService } from "../../shared/service/notification.service";
 import { Constants } from "../../shared/constants";
 import { ShareService } from "../../shared/service/share.service";
+import {User} from "../../data/interfaces/User";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ import { ShareService } from "../../shared/service/share.service";
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
-  userEmail: string | undefined = "";
+  _user: User | null = null;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserEmail();
+    this.getUser();
     this.isAuthenticated = this.authService.isAuthenticated() && !this.authService.isAccountInactive();
   }
 
@@ -65,9 +66,9 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  getUserEmail() {
+  getUser() {
     this.shareService.user$.subscribe(user => {
-      this.userEmail = user?.email;
+      this._user = user;
     });
   }
 }

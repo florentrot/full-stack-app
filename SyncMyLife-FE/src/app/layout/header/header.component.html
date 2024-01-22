@@ -53,7 +53,7 @@
       </ul>
 
       <!-- Email Logged In -->
-     <div class="h6 m-3" *ngIf="isAuthenticated">{{userEmail}}</div>
+     <div class="h6 m-3 auth-large" *ngIf="isAuthenticated">{{_user?.email || ''}}</div>
 
       <!-- Large Screen Auth Buttons -->
       <ng-container *ngIf="!isAuthenticated">
