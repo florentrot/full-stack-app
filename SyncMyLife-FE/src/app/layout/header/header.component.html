@@ -52,10 +52,8 @@
         </ng-container>
       </ul>
 
-      <!-- Search Form -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
+      <!-- Email Logged In -->
+     <div class="h6 m-3" *ngIf="isAuthenticated">{{userEmail}}</div>
 
       <!-- Large Screen Auth Buttons -->
       <ng-container *ngIf="!isAuthenticated">

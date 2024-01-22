@@ -1,11 +1,14 @@
-.row {
+.social-hub-nav-bar {
   display: flex;
-  flex-wrap: wrap;
-}
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 5px;
 
-.col-md-4 {
-  display: flex;
-  flex-direction: column;
+  button {
+    margin: 0 5px;
+  }
 }
 
 
@@ -33,15 +36,3 @@
   flex-wrap: wrap;
 }
 
-.social-hub-nav-bar{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: 50px;
-  margin-bottom: 5px;
-
-  button {
-    margin: 0 5px;
-  }
-}

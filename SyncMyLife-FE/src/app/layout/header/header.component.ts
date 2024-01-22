@@ -4,6 +4,7 @@ import { AuthService } from "../../core/service/auth.service";
 import { ConfirmDialogService } from "../../shared/service/confirm-dialog.service";
 import { NotificationService } from "../../shared/service/notification.service";
 import { Constants } from "../../shared/constants";
+import { ShareService } from "../../shared/service/share.service";
 
 @Component({
   selector: 'app-header',
@@ -12,11 +13,17 @@ import { Constants } from "../../shared/constants";
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
+  userEmail: string | undefined = "";
 
-  constructor(private router: Router, private authService: AuthService, private confirmDialogService: ConfirmDialogService, private notificationService: NotificationService) {
+  constructor(private router: Router,
+              private authService: AuthService,
+              private confirmDialogService: ConfirmDialogService,
+              private notificationService: NotificationService,
+              private shareService: ShareService) {
   }
 
   ngOnInit(): void {
+    this.getUserEmail();
     this.isAuthenticated = this.authService.isAuthenticated() && !this.authService.isAccountInactive();
   }
 
@@ -56,5 +63,11 @@ export class HeaderComponent implements OnInit {
           console.log('Rejected');
         }
       });
+  }
+
+  getUserEmail() {
+    this.shareService.user$.subscribe(user => {
+      this.userEmail = user?.email;
+    });
   }
 }

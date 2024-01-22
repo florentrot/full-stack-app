@@ -4,7 +4,10 @@
     <div class="card-body">
       <h5 class="card-title">{{personCard.name}}</h5>
       <p class="card-text">{{personCard.birthday | date}}</p>
-      <p class="card-text">{{personCard.details}}</p>
+      <p class="card-text">
+        {{personCard.details}}
+        <span class="edit-btn">Edit</span>
+      </p>
     </div>
   </div>
 </div>
