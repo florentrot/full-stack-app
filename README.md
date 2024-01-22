@@ -1,8 +1,8 @@
 https://trello.com/b/WORShsjB/syncmylife
 
-This is how we work.
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/de1aa6ed-9687-4a9b-87a6-6127051b3b9e)
+Just a nice component
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/20ee25c2-2371-4198-82e7-1ed5a1342cc1)
 
 
 Validation component
@@ -16,8 +16,8 @@ Confirmation email
 Dashboard (for auth only)
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
 
-Just a nice component
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/91d10e2e-5e11-489b-b016-6a90d72dfafb)
+
+
 
 
 
@@ -41,5 +41,7 @@ Confirm Dialog
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/1de5e1d8-01b7-4c6a-97e9-4900bec8a40a)
 
 
+This is how we work.
 
+![image](https://github.com/florentrot/full-stack-app/assets/99581506/de1aa6ed-9687-4a9b-87a6-6127051b3b9e)
 
