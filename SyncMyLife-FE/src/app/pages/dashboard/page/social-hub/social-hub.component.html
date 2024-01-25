@@ -12,7 +12,10 @@
       </div>
       <hr>
 
-      <app-add-person [isAddModeOn] = isAddModeOn></app-add-person>
+      <app-add-person
+        [isAddModeOn] = isAddModeOn
+        (sendNewPerson)="getLastPersonAdded($event)"
+      ></app-add-person>
 
       <hr>
       <p class="card-text lead">Your beautiful people</p>

@@ -1,34 +1,39 @@
-<div class="add-person-form row" [ngClass]="isAddModeOn ? 'open': 'closed'">
-  <div class="col" >
-    <form>
+<form [formGroup]="personForm">
+  <div class="add-person-form row" [ngClass]="isAddModeOn ? 'open': 'closed'">
+    <div class="col">
       <div class="form-group">
-        <label for="friendName">Friend's Name</label>
-        <input type="test" class="form-control" id="friendName" placeholder="John Doe">
+        <label for="name">Friend's Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="John Doe">
       </div>
       <div class="form-group">
-        <label for="friendRole">Who's this person?</label>
-        <input type="test" class="form-control" id="friendRole" placeholder="Wife/Dad/Friend">
+        <label for="pseudoName">Who's this person?</label>
+        <input type="text" class="form-control" id="pseudoName" formControlName="pseudoName"
+               placeholder="Wife/Dad/Friend">
       </div>
       <div class="form-group">
         <label for="birthday">Birthday</label>
-        <input type="date" class="form-control" id="birthday" value="1990-01-01" min="1910-01-01" max="2024-01-01">
+        <input type="date" class="form-control" id="birthday" formControlName="birthday"
+               min="1910-01-01" max="2024-01-01">
       </div>
-
       <div class="form-group">
         <label for="details">Details</label>
-        <textarea class="form-control" id="details" rows="3"></textarea>
+        <textarea class="form-control" id="details" formControlName="details" rows="3"></textarea>
       </div>
-    </form>
-    <button class="btn btn-success mt-2" (click)="savePerson()">Save</button>
-  </div>
-  <div class="col picture-card">
-    <label>Select a picture</label>
-    <div class="card">
-      <img src="{{imagePath}}" class="card-img-top" style="object-fit: cover" alt="Profile Picture">
-      <label class="bottom-btn">
-        <input type="file" id="friendPicture" (change)="handleFileChange($event)"/>
-        Choose file
-      </label>
+
+      <button class="btn btn-success mt-2" (click)="savePerson()" [disabled]="!isFormValid()">Save</button>
+    </div>
+    <div class="col picture-card">
+      <label id="first-label">Select a picture</label>
+      <div class="card">
+        <label class="close-btn" [ngClass]="hasFile()? '': 'd-none' " (click)="removePicture()">
+          X
+        </label>
+        <img [src]="imagePath" class="card-img-top" style="object-fit: cover" alt="Profile Picture">
+        <label class="bottom-btn">
+          <input type="file" id="imgUrl" formControlName="imgUrl" (change)="handleFileChange($event)"/>
+          Choose file
+        </label>
+      </div>
     </div>
   </div>
-</div>
+</form>

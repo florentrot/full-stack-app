@@ -6,6 +6,7 @@ export const Constants = {
   CONFIRM_REGISTRATION_MSG: "Email confirmed successfully!",
   INVALID_CREDENTIALS_MSG: "Invalid username/password",
   FETCHING_PERSONS_ERROR_MSG: "Error fetching person cards",
+  SAVING_PERSONS_ERROR_MSG: "Error trying to save this person",
   EMAIL_NOT_CONFIRMED: "Email not confirmed",
   CONFIRM_RESEND_VERIFICATION_CODE: "The verification code has been resubmitted successfully!",
   SUCCESSFULLY_LOGGED_OUT: "You have successfully logged out!",
