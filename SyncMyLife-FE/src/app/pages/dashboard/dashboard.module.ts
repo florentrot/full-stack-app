@@ -4,6 +4,7 @@ import { DashboardRoutingModule } from "./dashboard.routing";
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { PersonCardComponent } from './page/social-hub/person-card/person-card.component';
 import { AddPersonComponent } from './page/social-hub/add-person/add-person.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -19,7 +20,8 @@ import { AddPersonComponent } from './page/social-hub/add-person/add-person.comp
     ],
     imports: [
         CommonModule,
-        DashboardRoutingModule
+        DashboardRoutingModule,
+        ReactiveFormsModule
     ]
 })
 export class DashboardModule { }

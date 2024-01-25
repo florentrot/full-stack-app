@@ -47,4 +47,10 @@ export class SocialHubComponent implements OnInit {
     this.btnMessage = this.isAddModeOn ? "Close Form" : "Add Person";
     this.btnStyle = this.isAddModeOn ? "btn-danger" : "btn-success";
   }
+
+  getLastPersonAdded(event: any) {
+    // todo: need to solve it just pushing the card to not call again the api
+    // this.personCards.push(event);
+    this.fetchPersonCards();
+  }
 }

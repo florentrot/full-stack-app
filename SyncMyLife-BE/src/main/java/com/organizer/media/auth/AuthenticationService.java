@@ -117,7 +117,7 @@ public class AuthenticationService {
         return null;
     }
 
-    private String getEmailFromToken(String bearer) {
+    public String getEmailFromToken(String bearer) {
         String jwt = jwtService.getJWT(bearer);
         return jwtService.extractUsername(jwt);
     }

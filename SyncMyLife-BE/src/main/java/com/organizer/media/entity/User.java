@@ -1,6 +1,7 @@
 package com.organizer.media.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,7 +25,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String firstName;
     private String lastName;
@@ -33,6 +35,10 @@ public class User implements UserDetails {
     private LocalDateTime registrationDate;
     private LocalDateTime codeRequestTimestamp;
     private boolean isActive;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<HubPerson> hubPersonList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role role;
