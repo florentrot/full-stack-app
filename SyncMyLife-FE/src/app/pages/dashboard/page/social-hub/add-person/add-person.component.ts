@@ -17,6 +17,8 @@ export class AddPersonComponent {
   imagePath: string = 'assets/profile/mock.jpg';
   personForm: FormGroup;
   lastPersonAdded: PersonCardDTO | any;
+  selectedFile: File | any;
+  defaultDate: string = "1970-01-01";
 
   constructor(private formBuilder: FormBuilder,
               private loadingService: LoadingService,
@@ -32,6 +34,7 @@ export class AddPersonComponent {
   }
 
   handleFileChange(event: any): void {
+    this.selectedFile = event.target.files[0];
     const fileInput = event.target;
 
     if (fileInput.files && fileInput.files[0]) {
@@ -48,12 +51,13 @@ export class AddPersonComponent {
   removePicture() {
     this.personForm.get('imgUrl')?.setValue(null);
     this.imagePath = 'assets/profile/mock.jpg';
+    this.selectedFile = null;
   }
 
   savePerson(): void {
     const personData: PersonCardDTO = this.personForm.value as PersonCardDTO;
     this.loadingService.show();
-    this.dataService.savePerson(personData).subscribe({
+    this.dataService.savePerson(personData, this.selectedFile).subscribe({
         next: (data) => {
           this.lastPersonAdded = data;
         },
@@ -71,6 +75,7 @@ export class AddPersonComponent {
   clearForm() {
     this.personForm.reset();
     this.imagePath = 'assets/profile/mock.jpg';
+    this.selectedFile = null;
   }
 
   isFormValid(): boolean {

@@ -11,7 +11,7 @@ import {NotificationService} from "../../../../shared/service/notification.servi
   styleUrls: ['./social-hub.component.scss']
 })
 export class SocialHubComponent implements OnInit {
-
+// todo: make it Observable
   personCards: PersonCardDTO[] = [];
   isAddModeOn: boolean = false;
   btnMessage: any = "Add Person";
@@ -29,8 +29,8 @@ export class SocialHubComponent implements OnInit {
   fetchPersonCards(): void {
     this.loadingService.show();
     this.dataService.getPersons().subscribe({
-        next: (data) => {
-          this.personCards = data;
+        next: (cards) => {
+          this.personCards = cards;
           this.loadingService.hide();
         },
         error: (error) => {
@@ -48,9 +48,8 @@ export class SocialHubComponent implements OnInit {
     this.btnStyle = this.isAddModeOn ? "btn-danger" : "btn-success";
   }
 
-  getLastPersonAdded(event: any) {
-    // todo: need to solve it just pushing the card to not call again the api
+  async getLastPersonAdded(event: any) {
     // this.personCards.push(event);
-    this.fetchPersonCards();
+      this.fetchPersonCards();
   }
 }
