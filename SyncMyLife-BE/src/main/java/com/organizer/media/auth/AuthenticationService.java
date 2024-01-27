@@ -122,6 +122,15 @@ public class AuthenticationService {
         return jwtService.extractUsername(jwt);
     }
 
+    public User getUser(String token) {
+        String userEmail = getEmailFromToken(token);
+        Optional<User> userOptional = userRepository.findByEmail(userEmail);
+        if (userOptional.isEmpty()) {
+            return null;
+        }
+        return userOptional.get();
+    }
+
     private User getUserByEmail(String emailTo) {
         return userRepository.findByEmail(emailTo)
                 .orElseThrow(() -> new ValidationCodeException(Constants.EMAIL_ALREADY_EXISTS));

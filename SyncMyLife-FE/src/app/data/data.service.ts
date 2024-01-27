@@ -20,7 +20,10 @@ export class DataService{
     return this.http.get<PersonCardDTO[]>(`${Endpoints.socialHub}/persons`)
   }
 
-  savePerson(personCardDTO: PersonCardDTO): Observable<PersonCardDTO> {
-    return this.http.post<PersonCardDTO>(`${Endpoints.socialHub}/person`, personCardDTO);
+  savePerson(personCardDTO: PersonCardDTO, picture: File): Observable<PersonCardDTO> {
+    const formData = new FormData();
+    formData.append('personCardDTO', JSON.stringify(personCardDTO));
+    formData.append('picture', picture);
+    return this.http.post<PersonCardDTO>(`${Endpoints.socialHub}/person`, formData);
   }
 }

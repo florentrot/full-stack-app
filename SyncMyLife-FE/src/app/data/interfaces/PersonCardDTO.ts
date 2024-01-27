@@ -1,5 +1,5 @@
 export interface PersonCardDTO {
-  imgUrl: string;
+  imgUrl?: string;
   name: string;
   pseudoName: string;
   birthday: Date;

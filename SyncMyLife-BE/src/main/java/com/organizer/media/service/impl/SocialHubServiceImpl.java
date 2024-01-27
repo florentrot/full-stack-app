@@ -2,7 +2,6 @@ package com.organizer.media.service.impl;
 
 import com.organizer.media.auth.AuthenticationService;
 import com.organizer.media.dao.HubPersonDao;
-import com.organizer.media.dao.UserDao;
 import com.organizer.media.dto.HubPersonDTO;
 import com.organizer.media.entity.HubPerson;
 import com.organizer.media.entity.User;
@@ -19,8 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SocialHubServiceImpl implements SocialHubService {
 
-    private final UserDao userDao;
-
     private final HubPersonDao hubPersonDao;
 
     private final HubPersonMapper hubPersonMapper;
@@ -29,7 +26,7 @@ public class SocialHubServiceImpl implements SocialHubService {
 
     @Override
     public HubPersonDTO saveHubPerson(String token, HubPersonDTO hubPersonDTO) {
-        User user = getUser(token);
+        User user = authenticationService.getUser(token);
         HubPerson person = hubPersonMapper.mapToHubPerson(user, hubPersonDTO);
         this.hubPersonDao.save(person);
         HubPersonDTO personDTO = hubPersonMapper.mapToHubPersonDTO(person);
@@ -38,7 +35,7 @@ public class SocialHubServiceImpl implements SocialHubService {
 
     @Override
     public List<HubPersonDTO> getAllPersons(String token) {
-        User user = getUser(token);
+        User user = authenticationService.getUser(token);
         List<HubPersonDTO> allPersons = new ArrayList<>();
         Optional<List<HubPerson>> hubPersonOptional= hubPersonDao.findAllByUser(user);
         if (hubPersonOptional.isPresent()) {
@@ -49,12 +46,4 @@ public class SocialHubServiceImpl implements SocialHubService {
         return allPersons;
     }
 
-    private User getUser(String token) {
-        String userEmail = authenticationService.getEmailFromToken(token);
-        Optional<User> userOptional = this.userDao.findByEmail(userEmail);
-        if (userOptional.isEmpty()) {
-            return null;
-        }
-        return userOptional.get();
-    }
 }
