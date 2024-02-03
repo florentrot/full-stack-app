@@ -133,7 +133,7 @@ public class AuthenticationService {
 
     private User getUserByEmail(String emailTo) {
         return userRepository.findByEmail(emailTo)
-                .orElseThrow(() -> new ValidationCodeException(Constants.EMAIL_ALREADY_EXISTS));
+                .orElseThrow(() -> new ValidationCodeException(Constants.EMAIL_DOES_NOT_EXIST));
     }
 
     private void handleResendValidationCode(User user) {

@@ -1,16 +1,16 @@
 import {BehaviorSubject} from "rxjs";
-import {User} from "../../data/interfaces/User";
 import {Injectable} from "@angular/core";
+import {UserDTO} from "../../data/interfaces/UserDTO";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareService{
-  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private userSubject: BehaviorSubject<UserDTO | null> = new BehaviorSubject<UserDTO | null>(null);
   public user$ = this.userSubject.asObservable();
 
-  public setUser(user: User){
+  public setUser(user: UserDTO){
     this.userSubject.next(user);
   }
 

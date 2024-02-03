@@ -6,7 +6,6 @@ import {AuthDTO} from "../../data/interfaces/AuthDTO";
 import {Observable} from "rxjs/internal/Observable";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthenticationRequestDTO} from "../../data/interfaces/AuthenticationRequestDTO";
-import {UserLocalData} from "../../data/interfaces/User";
 
 @Injectable({
   providedIn: 'root'
@@ -55,13 +54,4 @@ export class AuthService {
     this.router.navigate(['public/home']);
   }
 
-  gelLocalUserData(): UserLocalData | null{
-    const token = localStorage.getItem('token')?.replace('Bearer ', '');
-    if (token) {
-      return <UserLocalData>this.jwtHelper.decodeToken(token);
-    }
-    else {
-      return null;
-    }
-  }
 }

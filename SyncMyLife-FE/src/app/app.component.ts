@@ -21,14 +21,8 @@ export class AppComponent implements OnInit{
   }
 
   fetchLoggedInUserData(): void{
-    const localUserData = this.authService.gelLocalUserData();
-    if (localUserData && this.authService.isAuthenticated()){
-      this.dataService.getUserByEmail(localUserData?.sub).subscribe(user => {
+      this.dataService.getUserByEmail().subscribe(user => {
         this.shareService.setUser(user);
       });
-    }
-    else {
-      console.log('User is not logged in.');
-    }
   }
 }

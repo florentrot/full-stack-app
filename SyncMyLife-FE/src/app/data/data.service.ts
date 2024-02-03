@@ -1,9 +1,9 @@
 import {HttpClient} from "@angular/common/http";
 import {Endpoints} from "./endpoints";
-import {User} from "./interfaces/User";
 import {Observable} from "rxjs/internal/Observable";
 import {Injectable} from "@angular/core";
 import {PersonCardDTO} from "./interfaces/PersonCardDTO";
+import {UserDTO} from "./interfaces/UserDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class DataService{
 
   constructor(private http: HttpClient) {}
 
-  public getUserByEmail(email: string | undefined): Observable<User>{
-    return this.http.get<User>(`${Endpoints.user}/${email}`);
+  public getUserByEmail(): Observable<UserDTO>{
+    return this.http.post<UserDTO>(`${Endpoints.user}/userDetails`, null);
   }
 
   public getPersons(): Observable<PersonCardDTO[]>{

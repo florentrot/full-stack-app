@@ -3,7 +3,7 @@ package com.organizer.media.utils;
 public class Constants {
     //EMAIL
     public static final String UNAVAILABLE_EMAIL = "This email is already in use";
-    public static final String EMAIL_ALREADY_EXISTS = "Email doesn't exists";
+    public static final String EMAIL_DOES_NOT_EXIST = "Email doesn't exists";
 
     //VALIDATION CODE
     public static final String INVALID_VALIDATION_CODE = "Your code is invalid";

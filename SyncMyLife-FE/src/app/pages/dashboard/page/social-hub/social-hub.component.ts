@@ -49,7 +49,7 @@ export class SocialHubComponent implements OnInit {
   }
 
   async getLastPersonAdded(event: any) {
-    // this.personCards.push(event);
+    this.notificationService.displayNotification(`${event.name} successfully added`, Constants.SUCCESS_STYLE);
       this.fetchPersonCards();
   }
 }
