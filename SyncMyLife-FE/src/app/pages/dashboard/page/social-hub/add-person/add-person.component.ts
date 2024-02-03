@@ -5,6 +5,7 @@ import {Constants} from "../../../../../shared/constants";
 import {LoadingService} from "../../../../../shared/service/loading.service";
 import {DataService} from "../../../../../data/data.service";
 import {NotificationService} from "../../../../../shared/service/notification.service";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-add-person',
@@ -57,9 +58,13 @@ export class AddPersonComponent {
   savePerson(): void {
     const personData: PersonCardDTO = this.personForm.value as PersonCardDTO;
     this.loadingService.show();
-    this.dataService.savePerson(personData, this.selectedFile).subscribe({
+    this.dataService.savePerson(personData, this.selectedFile)
+      .pipe(
+        tap(data => this.lastPersonAdded = data)
+      )
+      .subscribe({
         next: (data) => {
-          this.lastPersonAdded = data;
+          this.sendNewPerson.emit(data);
         },
         error: (error) => {
           console.log(error)
@@ -69,7 +74,6 @@ export class AddPersonComponent {
     );
     this.loadingService.hide();
     this.clearForm();
-    this.sendNewPerson.emit(this.lastPersonAdded);
   }
 
   clearForm() {

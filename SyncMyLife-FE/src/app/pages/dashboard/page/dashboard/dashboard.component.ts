@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ShareService} from "../../../../shared/service/share.service";
-import {User} from "../../../../data/interfaces/User";
+import {UserDTO} from "../../../../data/interfaces/UserDTO";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +9,7 @@ import {User} from "../../../../data/interfaces/User";
 })
 export class DashboardComponent implements OnInit{
   username: any = 'username';
-  _user: User | null = null;
+  _user: UserDTO | null = null;
 
   constructor(private shareService: ShareService) {}
 

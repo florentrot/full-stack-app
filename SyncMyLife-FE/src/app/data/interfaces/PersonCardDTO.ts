@@ -1,4 +1,5 @@
 export interface PersonCardDTO {
+  id?: number;
   imgUrl?: string;
   name: string;
   pseudoName: string;

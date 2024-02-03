@@ -5,7 +5,7 @@ import { ConfirmDialogService } from "../../shared/service/confirm-dialog.servic
 import { NotificationService } from "../../shared/service/notification.service";
 import { Constants } from "../../shared/constants";
 import { ShareService } from "../../shared/service/share.service";
-import {User} from "../../data/interfaces/User";
+import {UserDTO} from "../../data/interfaces/UserDTO";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ import {User} from "../../data/interfaces/User";
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
-  _user: User | null = null;
+  _user: UserDTO | null = null;
 
   constructor(private router: Router,
               private authService: AuthService,

@@ -36,6 +36,7 @@ public class HubPersonMapperImpl implements HubPersonMapper {
         if (hubPersonList !=null) {
             hubPersonList.forEach(person -> {
                 HubPersonDTO hubPersonDTO = new HubPersonDTO();
+                hubPersonDTO.setId(person.getId());
                 hubPersonDTO.setName(person.getName());
                 hubPersonDTO.setPseudoName(person.getPseudoName());
                 hubPersonDTO.setBirthday(person.getBirthday());
