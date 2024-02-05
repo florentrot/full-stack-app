@@ -7,7 +7,7 @@ import com.organizer.media.entity.HubPerson;
 import com.organizer.media.entity.User;
 import com.organizer.media.mappers.HubPersonMapper;
 import com.organizer.media.service.SocialHubService;
-import com.organizer.media.utils.Utils;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class SocialHubServiceImpl implements SocialHubService {
     public HubPersonDTO saveHubPerson(String token, HubPersonDTO hubPersonDTO) {
         User user = authenticationService.getUser(token);
         HubPerson person = hubPersonMapper.mapToHubPerson(user, hubPersonDTO);
-        this.hubPersonDao.save(person);
+        hubPersonDao.save(person);
         HubPersonDTO personDTO = hubPersonMapper.mapToHubPersonDTO(person);
         return personDTO;
     }

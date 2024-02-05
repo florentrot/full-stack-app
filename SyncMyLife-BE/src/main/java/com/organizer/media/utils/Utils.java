@@ -1,6 +1,8 @@
 package com.organizer.media.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -32,5 +34,23 @@ public class Utils {
     public static String decodeBase64(String toDecode) {
         byte[] decodedBytes = Base64.getDecoder().decode(toDecode);
         return new String(decodedBytes);
+    }
+
+    public static String generateUniqueFilename(String originalFilename) {
+        String extension = getFileExtension(originalFilename);
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String uniqueName = dateFormat.format(currentDate);
+        String newFilename = uniqueName + "." + extension;
+        return newFilename;
+    }
+
+
+    private static String getFileExtension(String filename) {
+        int lastDotIndex = filename.lastIndexOf(".");
+        if (lastDotIndex == -1) {
+            return "";
+        }
+        return filename.substring(lastDotIndex + 1);
     }
 }
