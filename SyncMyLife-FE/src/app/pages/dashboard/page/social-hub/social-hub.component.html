@@ -23,6 +23,8 @@
         <div class="alert alert-warning" role="alert" *ngIf="!personCards.length">
           Add some friends, your social hub friends list is empty.
         </div>
+        <!-- DEMO -->
+        <img [src]="image" alt="Image" style="width:50px;height:50px">
         <app-person-card *ngFor="let personCard of personCards" [personCard]="personCard"></app-person-card>
       </div>
 

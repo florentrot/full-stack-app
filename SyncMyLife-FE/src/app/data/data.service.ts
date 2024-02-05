@@ -26,4 +26,9 @@ export class DataService{
     formData.append('picture', picture);
     return this.http.post<PersonCardDTO>(`${Endpoints.socialHub}/person`, formData);
   }
+
+  // DEMO:
+  getHubPictures(): Observable<any> {
+    return this.http.get(`${Endpoints.socialHub}/pictures`, {responseType: 'blob' });
+  }
 }
