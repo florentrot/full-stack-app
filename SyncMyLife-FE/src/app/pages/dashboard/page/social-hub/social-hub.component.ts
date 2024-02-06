@@ -15,7 +15,7 @@ export class SocialHubComponent implements OnInit {
   isAddModeOn: boolean = false;
   btnMessage: any = "Add Person";
   btnStyle: any = "btn-success";
-  image: any;
+  images: any[] = [];
 
   constructor(private dataService: DataService,
               private loadingService: LoadingService,
@@ -24,8 +24,6 @@ export class SocialHubComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchPersonCards();
-    // DEMO:
-    this.getHubPictures();
   }
 
   fetchPersonCards(): void {
@@ -42,23 +40,6 @@ export class SocialHubComponent implements OnInit {
         }
       }
     );
-  }
-
-  // DEMO:
-  getHubPictures(): void {
-    this.dataService.getHubPictures().subscribe(data => {
-      this.createImageFromBlob(data);
-    });
-  }
-
-  createImageFromBlob(image: Blob): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      this.image = reader.result;
-    }, false);
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 
   addPersonToggle() {

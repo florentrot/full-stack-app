@@ -6,18 +6,11 @@ import com.organizer.media.dto.HubPersonDTO;
 import com.organizer.media.service.FileService;
 import com.organizer.media.service.SocialHubService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/socialHub")
@@ -54,28 +47,6 @@ public class SocialHubController {
             return ResponseEntity.ok(socialHubService.getAllPersons(bearer));
         } catch (Exception e) {
             return internalServerError();
-        }
-    }
-
-    // temporary DEMO:
-    @GetMapping("/pictures")
-    public ResponseEntity<Resource> getImages(@RequestHeader(HttpHeaders.AUTHORIZATION) String bearer) {
-        try {
-            String userEmail = authenticationService.getEmailFromToken(bearer);
-
-            List<Resource> pictures = fileService.getImages(userEmail);
-            if (pictures.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-            pictures.forEach(picture -> {
-            });
-
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(pictures.get(1));
-        } catch (Exception e) {
-            // Handle file I/O exception
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 

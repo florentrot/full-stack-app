@@ -45,9 +45,4 @@ public class WebConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/users/**")
-                .addResourceLocations("classpath:/static/");
-    }
 }
