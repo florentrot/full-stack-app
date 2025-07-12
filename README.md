@@ -42,7 +42,3 @@ Confirm Dialog
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/1de5e1d8-01b7-4c6a-97e9-4900bec8a40a)
 
 
-This is how we work.
-
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/de1aa6ed-9687-4a9b-87a6-6127051b3b9e)
-
