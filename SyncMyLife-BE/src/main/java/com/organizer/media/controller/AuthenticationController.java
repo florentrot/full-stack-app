@@ -21,53 +21,28 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request) {
-        try {
             return ResponseEntity.ok(service.register(request));
-        } catch (EmailAlreadyUsedException e) {
-            throw e;
-        } catch (Exception e) {
-            return internalServerError();
-        }
     }
 
     @PostMapping("/confirmAccount")
     public ResponseEntity<?> confirmUserAccount(@RequestBody ConfirmationEmailRequestDTO request) {
-        try {
             return ResponseEntity.ok(service.confirmAccount(request));
-        } catch (ValidationCodeException e) {
-            throw e;
-        } catch (Exception e) {
-            return internalServerError();
-        }
     }
 
     @PostMapping("/resendValidationCode")
     public ResponseEntity<?> resendValidationCode(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
-        try {
             if (token != null) {
                 return ResponseEntity.ok(service.resendValidationCode(token));
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing Bearer token");
+                return ResponseEntity
+                        .status(HttpStatus.UNAUTHORIZED)
+                        .body("Invalid or missing Bearer token");
             }
-        } catch (ValidationCodeException e) {
-            throw e;
-        } catch (Exception e) {
-            return internalServerError();
         }
-    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequestDTO request) {
-        try {
-            return ResponseEntity.ok(service.authenticate(request));
-        } catch (Exception e) {
-            return internalServerError();
-        }
+        return ResponseEntity.ok(service.authenticate(request));
     }
 
-    private ResponseEntity<String> internalServerError() {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("An error occurred");
-    }
 }

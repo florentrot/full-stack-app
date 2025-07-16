@@ -18,11 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class SocialHubController {
 
     private final SocialHubService socialHubService;
-
     private final FileService fileService;
-
     private final ObjectMapper objectMapper;
-
     private final AuthenticationService authenticationService;
 
     @PostMapping("/person")
@@ -43,11 +40,7 @@ public class SocialHubController {
 
     @GetMapping("/persons")
     public ResponseEntity<?> getAllPersons(@RequestHeader(HttpHeaders.AUTHORIZATION) String bearer) {
-        try {
             return ResponseEntity.ok(socialHubService.getAllPersons(bearer));
-        } catch (Exception e) {
-            return internalServerError();
-        }
     }
 
     private ResponseEntity<String> internalServerError() {
