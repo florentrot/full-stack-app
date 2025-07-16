@@ -17,6 +17,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.*;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final NotificationService notificationService;
 
+    @Transactional
     public AuthenticationResponseDTO register(RegisterRequestDTO request) throws EmailAlreadyUsedException {
         String verificationCode = generateCode();
         var user = User.builder()
@@ -49,7 +51,7 @@ public class AuthenticationService {
 
         checkEmailAvailable(request);
         userRepository.save(user);
-        notificationService.sendConfirmationNotification(request, verificationCode);
+        notificationService.sendConfirmationNotification(request, verificationCode); //todo: de scos metoda afară sau de eliminat complet
         return getToken(user);
     }
 
