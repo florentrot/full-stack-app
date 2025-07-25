@@ -1,6 +1,6 @@
 
 Just a nice component
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/07826c86-6b33-47ce-a4f8-c3085d8e4176)
+![hub](https://github.com/user-attachments/assets/9d97d324-7c59-4059-b646-c5ef67630bb9)
 
 
 
