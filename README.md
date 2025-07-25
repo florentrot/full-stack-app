@@ -26,7 +26,7 @@ Register component similar with Login component
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/af3aa1d8-b604-46d1-a650-de7e8ccde819)
 
 
-Mobile mode
+Mobile mode 
 ![phone](https://github.com/user-attachments/assets/9553fb3c-b87b-4c0d-98b3-04532000fe2b)
 
 
