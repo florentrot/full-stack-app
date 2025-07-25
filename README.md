@@ -30,12 +30,6 @@ Mobile mode
 ![phone](https://github.com/user-attachments/assets/9553fb3c-b87b-4c0d-98b3-04532000fe2b)
 
 
-
-Footer
-
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/898a5319-3bea-4acb-85a7-3380d0b4d7a8)
-
-
 Confirm Dialog
 
 ![image](https://github.com/florentrot/full-stack-app/assets/99581506/1de5e1d8-01b7-4c6a-97e9-4900bec8a40a)
