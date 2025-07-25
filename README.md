@@ -13,7 +13,8 @@ Confirmation email
 
 
 Dashboard (for auth only)
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/4fb75b92-b217-4d33-afae-9204d8503326)
+![dashboard](https://github.com/user-attachments/assets/9473bbd9-059a-4904-9420-bc1cac4e55aa)
+
 
 
 
@@ -26,8 +27,8 @@ Register component similar with Login component
 
 
 Mobile mode
+![phone](https://github.com/user-attachments/assets/9553fb3c-b87b-4c0d-98b3-04532000fe2b)
 
-![image](https://github.com/florentrot/full-stack-app/assets/99581506/be22b64e-af71-41ef-b20d-ab7497ce1bd9)
 
 
 Footer
